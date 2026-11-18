@@ -8,8 +8,9 @@ import { config } from "./config";
  * 3. Rate limit — per IP, per form.
  * 4. Cloudflare Turnstile — invisible check, verified server-side when keys are set.
  *
- * Rate limiting here is in-memory, which is per server instance. On serverless
- * hosting add a shared store (e.g. Upstash Redis) before launch. TODO(launch).
+ * Rate limiting uses Upstash Redis when it's configured (shared by every server
+ * instance on Vercel), and falls back to an in-memory limit (per instance) when it
+ * isn't, or when Redis doesn't answer within 1.5s.
  */
 
 export const HONEYPOT_FIELD = "website";
@@ -27,6 +28,36 @@ export async function clientIp(): Promise<string> {
     h.get("x-forwarded-for")?.split(",")[0]?.trim() ??
     "unknown"
   );
+}
+
+/**
+ * Fixed-window counter in Redis: INCR the key, and start its expiry on the first hit.
+ * Returns null when Redis isn't configured or fails, so the caller falls back.
+ */
+async function redisRateLimited(
+  key: string,
+  limit: number,
+  windowMs: number,
+): Promise<boolean | null> {
+  const { url, token } = config.redis;
+  if (!url || !token) return null;
+  try {
+    const res = await fetch(`${url.replace(/\/$/, "")}/pipeline`, {
+      method: "POST",
+      headers: { authorization: `Bearer ${token}`, "content-type": "application/json" },
+      body: JSON.stringify([
+        ["INCR", `rl:${key}`],
+        ["PEXPIRE", `rl:${key}`, String(windowMs), "NX"],
+      ]),
+      signal: AbortSignal.timeout(1500),
+      cache: "no-store",
+    });
+    if (!res.ok) return null;
+    const [count] = (await res.json()) as [{ result?: number }, unknown];
+    return typeof count?.result === "number" ? count.result > limit : null;
+  } catch {
+    return null;
+  }
 }
 
 function rateLimited(key: string, limit: number, windowMs: number) {
@@ -78,7 +109,11 @@ export async function checkSpam(
   if (!Number.isFinite(started) || Date.now() - started < MIN_FILL_MS) {
     return { ok: false, reason: "too-fast", silent: true };
   }
-  if (rateLimited(`${form}:${ip}`, limit.count, limit.windowMs)) {
+  const key = `${form}:${ip}`;
+  const limited =
+    (await redisRateLimited(key, limit.count, limit.windowMs)) ??
+    rateLimited(key, limit.count, limit.windowMs);
+  if (limited) {
     return { ok: false, reason: "rate-limited", silent: false };
   }
   if (!(await verifyTurnstile(String(fd.get(TURNSTILE_FIELD) ?? ""), ip))) {

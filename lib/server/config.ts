@@ -23,6 +23,15 @@ export const config = {
     secret: env("CRM_WEBHOOK_SECRET"),
   },
   turnstileSecret: env("TURNSTILE_SECRET_KEY"),
+  /**
+   * Shared rate-limit store (Upstash Redis over HTTP). Vercel's Upstash integration sets
+   * KV_REST_API_URL / KV_REST_API_TOKEN; a direct Upstash database gives UPSTASH_REDIS_REST_*.
+   * Unset → the in-memory limit (per server instance) is used.
+   */
+  redis: {
+    url: env("UPSTASH_REDIS_REST_URL") ?? env("KV_REST_API_URL"),
+    token: env("UPSTASH_REDIS_REST_TOKEN") ?? env("KV_REST_API_TOKEN"),
+  },
   brevo: {
     apiKey: env("BREVO_API_KEY"),
     listId: env("BREVO_LIST_ID"),

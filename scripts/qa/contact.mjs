@@ -30,6 +30,21 @@ const check = (run, name, pass, detail = "") => {
 
 /* ------------------------------------------------------------------ mock services */
 let received = [];
+// Upstash Redis REST mock (rate limiting shared across server instances).
+const redisStore = new Map();
+const redisCalls = [];
+function redisPipeline(cmds) {
+  return cmds.map(([cmd, key, arg]) => {
+    redisCalls.push(cmd);
+    if (cmd === "INCR") {
+      const n = (redisStore.get(key) ?? 0) + 1;
+      redisStore.set(key, n);
+      return { result: n };
+    }
+    if (cmd === "PEXPIRE") return { result: Number(arg) > 0 ? 1 : 0 };
+    return { error: `unsupported ${cmd}` };
+  });
+}
 const mock = createServer((req, res) => {
   let body = "";
   req.on("data", (c) => (body += c));
@@ -39,6 +54,12 @@ const mock = createServer((req, res) => {
       json = JSON.parse(body);
     } catch {
       /* not JSON */
+    }
+    if (req.url === "/redis/pipeline") {
+      const authed = req.headers.authorization === "Bearer test-token";
+      res.writeHead(authed ? 200 : 401, { "content-type": "application/json" });
+      res.end(JSON.stringify(authed ? redisPipeline(json ?? []) : { error: "unauthorized" }));
+      return;
     }
     received.push({ path: req.url, headers: req.headers, body: json });
     res.writeHead(200, { "content-type": "application/json" });
@@ -101,6 +122,8 @@ const wired = startServer(3100, {
   BREVO_API_URL: `${mockUrl}/brevo`,
   DECK_URL: "https://example.test/pinnacle-capabilities.pdf",
   CAREERS_TO_EMAIL: "careers@example.test",
+  UPSTASH_REDIS_REST_URL: `${mockUrl}/redis`,
+  UPSTASH_REDIS_REST_TOKEN: "test-token",
 });
 const bare = startServer(3101, {
   RESEND_API_KEY: "",
@@ -415,6 +438,12 @@ try {
       "rate limit: 6th enquiry in 10 minutes is refused",
       outcomes.join() === "ok,ok,ok,ok,limited",
       outcomes.join(","),
+    );
+    check(
+      run,
+      "rate limit is shared through Redis (Upstash REST)",
+      redisCalls.includes("INCR") && redisCalls.includes("PEXPIRE"),
+      `${redisCalls.length} Redis commands`,
     );
   }
 

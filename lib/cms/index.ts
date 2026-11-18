@@ -36,7 +36,8 @@ async function fetchOr<T>(
     });
     return data ?? fallback;
   } catch (err) {
-    console.error("[cms] fetch failed, serving seed:", err);
+    // One line per failure (the full error object floods build logs).
+    console.error("[cms] fetch failed, serving seed:", err instanceof Error ? err.message : err);
     return fallback;
   }
 }

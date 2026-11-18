@@ -44,20 +44,22 @@ Tick each line; note the device, OS and browser version next to any problem, wit
 ### Before switching DNS
 
 - [ ] Domain decided → set `NEXT_PUBLIC_SITE_URL` (canonical URLs, sitemap, share images)
-- [ ] Hosting project created (Vercel recommended) with every variable from `.env.example` that you use
+- [ ] **Vercel**: Add New → Project → import `pinnaclestudios1/pinnacle-website-v1`. Framework, build command and Node 22 are picked up from the repo; `vercel.json` runs the server code in Mumbai (`bom1`). An agency site is commercial use, so the team needs the **Pro** plan
+- [ ] Every variable from `.env.example` that you use, under Project → Settings → Environment Variables (Production, and Preview if you test there); redeploy after adding them
 - [ ] **Sanity**: project created, seed imported (`npm run cms:seed` then `npx sanity dataset import …`), placeholders replaced, webhook → `/api/revalidate` with `SANITY_REVALIDATE_SECRET`, site URL added as a CORS origin
 - [ ] **Email (Resend)**: sending domain verified (SPF/DKIM); `CONTACT_FROM_EMAIL` is a real person; `CONTACT_TO_EMAIL` set
 - [ ] **Turnstile**: site + secret keys set
 - [ ] **CRM / Slack**: webhook URLs set (optional but recommended)
 - [ ] **Booking**: `NEXT_PUBLIC_BOOKING_URL` set (Cal.com or Calendly)
 - [ ] **Analytics**: choose GA4 + Clarity (banner appears) or Plausible (no banner), set the ID(s); update `/privacy` and `/cookies` wording to match
-- [ ] Rate limiting: add a shared store (e.g. Upstash Redis) — the built-in one is per server instance (`lib/server/spam.ts`)
+- [ ] Rate limiting: Vercel → Storage / Marketplace → **Upstash for Redis** → connect it to the project (free tier is plenty). Without it, the limit only applies per server instance
 - [ ] `npm run qa:todos` → every “Content”, “Legal” and “Keys” item is resolved, or consciously accepted
 - [ ] Legal review of /privacy, /terms, /cookies done; company details filled in `lib/site.ts`
 
 ### Go live
 
-- [ ] Deploy; open the production URL in a private window
+- [ ] Domain: Project → Settings → Domains → add it, follow the DNS records shown; set `NEXT_PUBLIC_SITE_URL` to it and redeploy
+- [ ] Deploy (every push to `main` deploys; other branches get preview links); open the production URL in a private window
 - [ ] Submit one **real** brief: team email, auto-reply, CRM record and Slack message all arrive
 - [ ] Send one newsletter signup and one deck request
 - [ ] Check share previews: paste the URL into WhatsApp / LinkedIn / Slack (the Dot card appears)

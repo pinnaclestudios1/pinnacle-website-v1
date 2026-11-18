@@ -1,0 +1,496 @@
+@import "tailwindcss";
+@import "./tokens.css";
+@import "lenis/dist/lenis.css";
+
+/*
+ * Tailwind theme mapped onto the brand tokens.
+ * The default Tailwind palette is removed on purpose: only brand colours exist,
+ * so orange can't creep in anywhere it shouldn't (brief §1 "The Dot is the only loud thing").
+ */
+@theme inline {
+  --color-*: initial;
+  --color-bg: var(--pn-bg);
+  --color-surface: var(--pn-surface);
+  --color-line: var(--pn-line);
+  --color-ink: var(--pn-ink);
+  --color-ink-soft: var(--pn-ink-soft);
+  --color-accent: var(--pn-accent);
+  --color-accent-ink: var(--pn-accent-ink);
+  --color-glow: var(--pn-glow);
+  --color-node: var(--pn-node-fill);
+  --color-node-stroke: var(--pn-node-stroke);
+  --color-focus: var(--pn-focus);
+  --color-cream: var(--pn-cream);
+  --color-cream-light: var(--pn-cream-light);
+  --color-charcoal: var(--pn-charcoal);
+  --color-night: var(--pn-night);
+  --color-white: #fff;
+  --color-black: #000;
+
+  --font-display: var(--font-fraunces), "Iowan Old Style", Georgia, serif;
+  --font-sans: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, "SFMono-Regular", Menlo, monospace;
+
+  /* Fluid type — headline up to ~120px desktop, ~44px mobile (brief §2). */
+  --text-display: clamp(2.75rem, 1.6rem + 5.6vw, 7.5rem);
+  --text-display--line-height: 0.95;
+  --text-display--letter-spacing: -0.025em;
+  --text-h1: clamp(2.5rem, 1.75rem + 3.6vw, 5.25rem);
+  --text-h1--line-height: 1;
+  --text-h1--letter-spacing: -0.02em;
+  --text-h2: clamp(2rem, 1.5rem + 2.2vw, 3.5rem);
+  --text-h2--line-height: 1.05;
+  --text-h2--letter-spacing: -0.015em;
+  --text-h3: clamp(1.375rem, 1.2rem + 0.7vw, 1.75rem);
+  --text-h3--line-height: 1.2;
+  --text-lead: clamp(1.125rem, 1.05rem + 0.4vw, 1.375rem);
+  --text-lead--line-height: 1.5;
+  --text-body: clamp(1rem, 0.96rem + 0.2vw, 1.125rem);
+  --text-body--line-height: 1.6;
+  --text-label: 0.75rem;
+  --text-label--line-height: 1.2;
+  --text-label--letter-spacing: 0.08em;
+
+  --radius-sm: var(--pn-radius-sm);
+  --radius-md: var(--pn-radius-md);
+
+  --ease-out-expo: var(--pn-ease-out);
+  --ease-in-out-expo: var(--pn-ease-in-out);
+  --ease-dot: var(--pn-ease-dot);
+
+  --breakpoint-xs: 30rem;
+}
+
+@layer base {
+  html {
+    color-scheme: light;
+    -webkit-text-size-adjust: 100%;
+    scroll-padding-top: calc(var(--pn-header-h) + 1rem);
+    background-color: var(--pn-bg);
+  }
+
+  body {
+    min-height: 100dvh;
+    background-color: var(--pn-bg);
+    color: var(--pn-ink);
+    font-family: var(--font-sans);
+    font-size: var(--text-body);
+    line-height: var(--text-body--line-height);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    text-wrap: balance;
+    font-optical-sizing: auto;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    background-color: var(--pn-ink);
+    color: var(--pn-bg);
+  }
+
+  /* Visible focus everywhere (WCAG 2.4.7 / 2.4.13). Charcoal, never orange — orange fails 3:1 on cream. */
+  :focus-visible {
+    outline: 2px solid var(--pn-focus);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  /* Programmatic focus targets (main, headings after navigation) shouldn't show a ring. */
+  [tabindex="-1"]:focus:not(:focus-visible) {
+    outline: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer components {
+  /* Small mono label used for eyebrows, meta and the altitude meter. */
+  .label {
+    font-family: var(--font-mono);
+    font-size: var(--text-label);
+    line-height: var(--text-label--line-height);
+    letter-spacing: var(--text-label--letter-spacing);
+    text-transform: uppercase;
+  }
+
+  /* Placeholder marker for content the studio must supply. Intentionally obvious. */
+  .todo {
+    display: inline-block;
+    padding: 0.1em 0.45em;
+    border: 1px dashed var(--pn-line);
+    border-radius: var(--pn-radius-sm);
+    font-family: var(--font-mono);
+    font-size: min(0.8em, 0.8125rem);
+    line-height: 1.4;
+    color: var(--pn-ink-soft);
+    vertical-align: middle;
+  }
+}
+
+/* ---------- Reveal (progressive: content is visible without JS) ---------- */
+@layer utilities {
+  .js [data-reveal]:not([data-revealed]) {
+    opacity: 0;
+    /* Safety net: if the observer never fires, content still appears. */
+    animation: pn-reveal-fallback 0s linear 3s forwards;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .js [data-reveal]:not([data-revealed]) {
+      transform: translate3d(0, 1.5rem, 0);
+    }
+  }
+
+  [data-reveal] {
+    transition:
+      opacity var(--pn-dur-reveal) var(--pn-ease-out),
+      transform var(--pn-dur-reveal) var(--pn-ease-out);
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    [data-reveal] {
+      transition: opacity var(--pn-dur-ui) linear;
+    }
+  }
+}
+
+@keyframes pn-reveal-fallback {
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ==========================================================================
+   Preloader (brief §5 Stage 0) — shown only when the head script adds html.preload.
+   Pure CSS so it runs before hydration and always ends by itself (≤ 2.5s).
+   Line drawing uses stroke-dashoffset on a few thin SVG paths: the brief asks for
+   SVG path animation here; it repaints only the small logo (see DECISIONS #20).
+   ========================================================================== */
+.preloader {
+  display: none;
+}
+
+html.preload .preloader {
+  --pre-w: clamp(9rem, 26vw, 13rem);
+  position: fixed;
+  inset: 0;
+  z-index: 95;
+  display: grid;
+  place-items: center;
+  background: var(--pn-bg);
+  animation: pn-pre-out 0.35s ease-in 2.15s forwards;
+}
+
+html.preload.preload-skip .preloader {
+  animation: pn-pre-out 0.25s ease-in forwards;
+}
+
+.preloader-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.preloader-wordmark {
+  width: calc(var(--pre-w) * 1.25);
+  opacity: 0;
+  transform: translateY(8px);
+  animation: pn-rise 0.5s var(--pn-ease-out) 1.4s forwards;
+}
+
+.preloader [data-pre-line] {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: pn-draw 0.8s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+}
+
+.preloader [data-pre-line="inner"] {
+  animation-duration: 0.6s;
+  animation-delay: 0.45s;
+}
+
+.preloader [data-pre-node] {
+  transform-box: fill-box;
+  transform-origin: center;
+  transform: scale(0);
+  animation: pn-pop 0.35s var(--pn-ease-dot) forwards;
+}
+
+.preloader [data-pre-dot] {
+  transform: translateY(-40vh);
+  animation: pn-drop 0.4s cubic-bezier(0.55, 0, 1, 0.45) 0.95s forwards;
+}
+
+.preloader [data-pre-squash] {
+  transform-origin: 50% 90%;
+  animation: pn-squash 0.55s ease-out 1.35s;
+}
+
+/* Eyes start closed, open after landing, then blink once. */
+.preloader [data-part="eye-closed"] {
+  opacity: 1;
+  animation: pn-fade-out 0.1s linear 1.55s forwards;
+}
+
+.preloader [data-part="eye-open"] {
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation:
+    pn-fade-in 0.1s linear 1.55s forwards,
+    pn-blink 0.2s ease-in-out 1.95s;
+}
+
+@keyframes pn-pre-out {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+@keyframes pn-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes pn-pop {
+  to {
+    transform: scale(1);
+  }
+}
+@keyframes pn-drop {
+  to {
+    transform: translateY(0);
+  }
+}
+@keyframes pn-squash {
+  0% {
+    transform: scale(1.22, 0.78);
+  }
+  35% {
+    transform: translateY(-14%) scale(0.92, 1.1);
+  }
+  65% {
+    transform: translateY(0) scale(1.08, 0.93);
+  }
+  100% {
+    transform: none;
+  }
+}
+@keyframes pn-rise {
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes pn-fade-in {
+  to {
+    opacity: 1;
+  }
+}
+@keyframes pn-fade-out {
+  to {
+    opacity: 0;
+  }
+}
+@keyframes pn-blink {
+  50% {
+    transform: scaleY(0.1);
+  }
+}
+
+/* The Climb's Dot exists whenever JS runs; its position depends on the mode. */
+.js [data-scene="climb"] [data-climb-dot] {
+  display: block;
+}
+
+/* ==========================================================================
+   The Climb (brief §5 Stage 3): a vertical stack by default (mobile, reduced
+   motion, no JS). On desktop with motion it becomes a pinned horizontal trail
+   where nodes bloom open as the Dot lands on them.
+   ========================================================================== */
+@media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
+  .js [data-scene="climb"] {
+    --climb-dot-x: 28vw;
+    --climb-card: 19rem;
+  }
+  .js [data-scene="climb"] [data-climb-pin] {
+    display: flex;
+    min-height: 100svh;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+  }
+  .js [data-scene="climb"] [data-climb-track] {
+    display: flex;
+    width: max-content;
+    max-width: none;
+    margin-inline: 0;
+    gap: 3.5rem;
+    padding-left: calc(var(--climb-dot-x) - 2rem);
+    padding-right: calc(100vw - var(--climb-dot-x) - var(--climb-card) + 2rem);
+  }
+  .js [data-scene="climb"] [data-node] {
+    width: var(--climb-card);
+  }
+  .js [data-scene="climb"] [data-climb-trail] {
+    display: block;
+  }
+  /* Body bottom (90% of the 1.25× box) rests on the top of the node circles. */
+  .js [data-scene="climb"] [data-climb-dot] {
+    left: var(--climb-dot-x);
+    top: calc(var(--climb-dot-size) * -1.125);
+    translate: -50% 0;
+  }
+  /* Inactive nodes stay legible (AA contrast): the name softens to ink-soft and the
+     summary + link fade out until the node is reached, hovered or focused. */
+  .js [data-scene="climb"] [data-node]:not([data-active]):not(:focus-within) [data-node-body] {
+    transform: translateY(0.75rem);
+  }
+  .js [data-scene="climb"] [data-node]:not([data-active]):not(:focus-within) [data-node-body] h3 {
+    color: var(--pn-ink-soft);
+  }
+  .js
+    [data-scene="climb"]
+    [data-node]:not([data-active]):not(:focus-within):not(:hover)
+    [data-node-more] {
+    opacity: 0;
+  }
+  .js [data-scene="climb"] [data-node]:not([data-active]):not(:focus-within) [data-node-circle] {
+    transform: scale(0.6);
+  }
+}
+
+/* Custom cursor (components/extras/cursor.ts) — only while the module is running. */
+html.has-custom-cursor,
+html.has-custom-cursor * {
+  cursor: none !important;
+}
+html.has-custom-cursor
+  :is(
+    input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]),
+    textarea,
+    [contenteditable="true"]
+  ) {
+  cursor: text !important;
+}
+.pn-cursor-dot,
+.pn-cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 120;
+  pointer-events: none;
+  border-radius: 999px;
+  opacity: 0;
+  transition:
+    opacity 0.2s linear,
+    background-color 0.2s linear,
+    border-color 0.2s linear;
+  will-change: transform;
+  contain: strict;
+}
+.pn-cursor-dot {
+  width: 6px;
+  height: 6px;
+  margin: -3px 0 0 -3px;
+  background: var(--pn-ink);
+}
+.pn-cursor-ring {
+  width: 34px;
+  height: 34px;
+  margin: -17px 0 0 -17px;
+  border: 1.25px solid rgb(30 30 30 / 0.55);
+}
+/* Over the night footer (cursor.ts toggles this). */
+.cursor-on-dark .pn-cursor-dot {
+  background: var(--pn-cream);
+}
+.cursor-on-dark .pn-cursor-ring {
+  border-color: rgb(246 241 231 / 0.6);
+}
+
+/* Blueprint Room (desktop, while it builds): one caption at a time, stacked in one
+   cell, plus the progress bar — so heading, captions and window fit one screen. */
+@media (min-width: 64rem) {
+  [data-bp-scrub] [data-bp-steps] {
+    display: flex;
+  }
+  [data-bp-scrub] [data-bp-captions] {
+    display: grid;
+  }
+  [data-bp-scrub] [data-bp-captions] > li {
+    grid-area: 1 / 1;
+    margin: 0;
+    transition:
+      opacity 0.35s var(--pn-ease-out),
+      transform 0.35s var(--pn-ease-out);
+  }
+  [data-bp-scrub] [data-bp-captions] > li[data-dim] {
+    opacity: 0;
+    transform: translateY(0.5rem);
+  }
+}
+
+/* FAQ answers ease in when opened (transform + opacity only). */
+@media (prefers-reduced-motion: no-preference) {
+  details[open] > .faq-answer {
+    animation: pn-rise-in 0.4s var(--pn-ease-out);
+  }
+}
+@keyframes pn-rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+}
+
+/* Static Dot illustrations (components/dot/DotIllustration.tsx) — pose via CSS only. */
+[data-pose="happy"] [data-part="eye-open"],
+[data-pose="flag"] [data-part="eye-open"] {
+  opacity: 0;
+}
+[data-pose="happy"] [data-part="eye-happy"],
+[data-pose="happy"] [data-part="mouth-smile"],
+[data-pose="flag"] [data-part="eye-happy"],
+[data-pose="flag"] [data-part="mouth-smile"],
+[data-pose="flag"] [data-part="acc-flag"],
+[data-pose="sunglasses"] [data-part="acc-sunglasses"],
+[data-pose="sunglasses"] [data-part="mouth-smile"],
+[data-pose="lost"] [data-part="acc-map"] {
+  opacity: 1;
+}
+
+/* Stars twinkle slowly — well under 3 flashes/second (WCAG 2.3.1). */
+@keyframes pn-twinkle {
+  0%,
+  100% {
+    opacity: var(--star-o, 0.8);
+  }
+  50% {
+    opacity: 0.2;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .star-twinkle {
+    animation: pn-twinkle var(--star-d, 6s) ease-in-out var(--star-delay, 0s) infinite;
+  }
+}

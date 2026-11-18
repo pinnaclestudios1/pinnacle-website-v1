@@ -1,0 +1,308 @@
+[
+  {
+    "run": "desktop",
+    "name": "/work",
+    "pass": true,
+    "detail": "Work — Pinnacle Studios"
+  },
+  {
+    "run": "desktop",
+    "name": "/work/project-one",
+    "pass": true,
+    "detail": "Case study (draft) — Pinnacle Studios"
+  },
+  {
+    "run": "desktop",
+    "name": "/services",
+    "pass": true,
+    "detail": "Services — Pinnacle Studios"
+  },
+  {
+    "run": "desktop",
+    "name": "/services/web-development",
+    "pass": true,
+    "detail": "Web Design & Development — Pinnacle Studios"
+  },
+  {
+    "run": "desktop",
+    "name": "/services/mobile-apps",
+    "pass": true,
+    "detail": "Mobile Apps — Pinnacle Studios"
+  },
+  {
+    "run": "desktop",
+    "name": "/services/care-plans",
+    "pass": true,
+    "detail": "Maintenance & Growth — Pinnacle Studios"
+  },
+  {
+    "run": "desktop",
+    "name": "/process",
+    "pass": true,
+    "detail": "Process — Pinnacle Studios"
+  },
+  {
+    "run": "desktop",
+    "name": "/about",
+    "pass": true,
+    "detail": "About — Pinnacle Studios"
+  },
+  {
+    "run": "desktop",
+    "name": "/careers",
+    "pass": true,
+    "detail": "Careers — Pinnacle Studios"
+  },
+  {
+    "run": "desktop",
+    "name": "/careers/example-role",
+    "pass": true,
+    "detail": "Open role (draft) — Pinnacle Studios"
+  },
+  {
+    "run": "desktop",
+    "name": "/faq",
+    "pass": true,
+    "detail": "FAQ — Pinnacle Studios"
+  },
+  {
+    "run": "desktop",
+    "name": "/hello",
+    "pass": true,
+    "detail": "Hello from Instagram — Pinnacle Studios"
+  },
+  {
+    "run": "desktop",
+    "name": "/contact",
+    "pass": true,
+    "detail": "Start a project — Pinnacle Studios"
+  },
+  {
+    "run": "desktop",
+    "name": "/contact/book",
+    "pass": true,
+    "detail": "Book a call — Pinnacle Studios"
+  },
+  {
+    "run": "desktop",
+    "name": "/contact/thank-you",
+    "pass": true,
+    "detail": "Thank you — Pinnacle Studios"
+  },
+  {
+    "run": "desktop",
+    "name": "/privacy",
+    "pass": true,
+    "detail": "Privacy policy — Pinnacle Studios"
+  },
+  {
+    "run": "desktop",
+    "name": "/terms",
+    "pass": true,
+    "detail": "Terms of use — Pinnacle Studios"
+  },
+  {
+    "run": "desktop",
+    "name": "/cookies",
+    "pass": true,
+    "detail": "Cookie policy — Pinnacle Studios"
+  },
+  {
+    "run": "mobile",
+    "name": "/work",
+    "pass": true,
+    "detail": "Work — Pinnacle Studios"
+  },
+  {
+    "run": "mobile",
+    "name": "/work/project-one",
+    "pass": true,
+    "detail": "Case study (draft) — Pinnacle Studios"
+  },
+  {
+    "run": "mobile",
+    "name": "/services",
+    "pass": true,
+    "detail": "Services — Pinnacle Studios"
+  },
+  {
+    "run": "mobile",
+    "name": "/services/web-development",
+    "pass": true,
+    "detail": "Web Design & Development — Pinnacle Studios"
+  },
+  {
+    "run": "mobile",
+    "name": "/services/mobile-apps",
+    "pass": true,
+    "detail": "Mobile Apps — Pinnacle Studios"
+  },
+  {
+    "run": "mobile",
+    "name": "/services/care-plans",
+    "pass": true,
+    "detail": "Maintenance & Growth — Pinnacle Studios"
+  },
+  {
+    "run": "mobile",
+    "name": "/process",
+    "pass": true,
+    "detail": "Process — Pinnacle Studios"
+  },
+  {
+    "run": "mobile",
+    "name": "/about",
+    "pass": true,
+    "detail": "About — Pinnacle Studios"
+  },
+  {
+    "run": "mobile",
+    "name": "/careers",
+    "pass": true,
+    "detail": "Careers — Pinnacle Studios"
+  },
+  {
+    "run": "mobile",
+    "name": "/careers/example-role",
+    "pass": true,
+    "detail": "Open role (draft) — Pinnacle Studios"
+  },
+  {
+    "run": "mobile",
+    "name": "/faq",
+    "pass": true,
+    "detail": "FAQ — Pinnacle Studios"
+  },
+  {
+    "run": "mobile",
+    "name": "/hello",
+    "pass": true,
+    "detail": "Hello from Instagram — Pinnacle Studios"
+  },
+  {
+    "run": "mobile",
+    "name": "/contact",
+    "pass": true,
+    "detail": "Start a project — Pinnacle Studios"
+  },
+  {
+    "run": "mobile",
+    "name": "/contact/book",
+    "pass": true,
+    "detail": "Book a call — Pinnacle Studios"
+  },
+  {
+    "run": "mobile",
+    "name": "/contact/thank-you",
+    "pass": true,
+    "detail": "Thank you — Pinnacle Studios"
+  },
+  {
+    "run": "mobile",
+    "name": "/privacy",
+    "pass": true,
+    "detail": "Privacy policy — Pinnacle Studios"
+  },
+  {
+    "run": "mobile",
+    "name": "/terms",
+    "pass": true,
+    "detail": "Terms of use — Pinnacle Studios"
+  },
+  {
+    "run": "mobile",
+    "name": "/cookies",
+    "pass": true,
+    "detail": "Cookie policy — Pinnacle Studios"
+  },
+  {
+    "run": "work",
+    "name": "platform filter narrows the grid and updates the URL",
+    "pass": true,
+    "detail": "3 → 1"
+  },
+  {
+    "run": "work",
+    "name": "the Dot hops to the selected filter",
+    "pass": true,
+    "detail": "x 25 → 188"
+  },
+  {
+    "run": "work",
+    "name": "empty filter combination shows the Lost Dot empty state",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "run": "case-study",
+    "name": "has every section from the brief",
+    "pass": true,
+    "detail": "At a glance, The challenge, The approach, Design, Build, Motion and details, Results, Your project could be the next peak., Services, Studio, Contact, Follow the climb"
+  },
+  {
+    "run": "case-study",
+    "name": "placeholder case study is noindex",
+    "pass": true,
+    "detail": "noindex, follow"
+  },
+  {
+    "run": "faq",
+    "name": "question opens (native details) and the Dot hops to it",
+    "pass": true,
+    "detail": "y 47 → 411"
+  },
+  {
+    "run": "trail",
+    "name": "/services: the Dot rides the trail",
+    "pass": true,
+    "detail": "desktop"
+  },
+  {
+    "run": "trail",
+    "name": "/process: the Dot rides the trail",
+    "pass": true,
+    "detail": "desktop"
+  },
+  {
+    "run": "about",
+    "name": "team node toggles its card",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "run": "studio",
+    "name": "renders without site chrome",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "run": "studio",
+    "name": "shows setup steps until a Sanity project is connected",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "run": "seo",
+    "name": "sitemap lists service pages",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "run": "seo",
+    "name": "sitemap leaves out placeholder case studies and roles",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "run": "seo",
+    "name": "unknown case study returns 404",
+    "pass": true,
+    "detail": "404"
+  },
+  {
+    "run": "behaviours",
+    "name": "no console or page errors",
+    "pass": true,
+    "detail": ""
+  }
+]

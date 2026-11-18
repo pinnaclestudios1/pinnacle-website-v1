@@ -1,0 +1,292 @@
+[
+  {
+    "run": "desktop",
+    "route": "/",
+    "violations": []
+  },
+  {
+    "run": "desktop",
+    "route": "/work",
+    "violations": []
+  },
+  {
+    "run": "desktop",
+    "route": "/work/project-one",
+    "violations": []
+  },
+  {
+    "run": "desktop",
+    "route": "/services",
+    "violations": []
+  },
+  {
+    "run": "desktop",
+    "route": "/services/web-development",
+    "violations": []
+  },
+  {
+    "run": "desktop",
+    "route": "/services/ecommerce",
+    "violations": []
+  },
+  {
+    "run": "desktop",
+    "route": "/process",
+    "violations": []
+  },
+  {
+    "run": "desktop",
+    "route": "/about",
+    "violations": []
+  },
+  {
+    "run": "desktop",
+    "route": "/careers",
+    "violations": []
+  },
+  {
+    "run": "desktop",
+    "route": "/careers/example-role",
+    "violations": []
+  },
+  {
+    "run": "desktop",
+    "route": "/faq",
+    "violations": []
+  },
+  {
+    "run": "desktop",
+    "route": "/hello",
+    "violations": []
+  },
+  {
+    "run": "desktop",
+    "route": "/contact",
+    "violations": []
+  },
+  {
+    "run": "desktop",
+    "route": "/contact/book",
+    "violations": []
+  },
+  {
+    "run": "desktop",
+    "route": "/contact/thank-you",
+    "violations": []
+  },
+  {
+    "run": "desktop",
+    "route": "/privacy",
+    "violations": []
+  },
+  {
+    "run": "desktop",
+    "route": "/terms",
+    "violations": []
+  },
+  {
+    "run": "desktop",
+    "route": "/cookies",
+    "violations": []
+  },
+  {
+    "run": "desktop",
+    "route": "/this-page-does-not-exist",
+    "violations": []
+  },
+  {
+    "run": "mobile",
+    "route": "/",
+    "violations": []
+  },
+  {
+    "run": "mobile",
+    "route": "/work",
+    "violations": []
+  },
+  {
+    "run": "mobile",
+    "route": "/work/project-one",
+    "violations": []
+  },
+  {
+    "run": "mobile",
+    "route": "/services",
+    "violations": []
+  },
+  {
+    "run": "mobile",
+    "route": "/services/web-development",
+    "violations": []
+  },
+  {
+    "run": "mobile",
+    "route": "/services/ecommerce",
+    "violations": []
+  },
+  {
+    "run": "mobile",
+    "route": "/process",
+    "violations": []
+  },
+  {
+    "run": "mobile",
+    "route": "/about",
+    "violations": []
+  },
+  {
+    "run": "mobile",
+    "route": "/careers",
+    "violations": []
+  },
+  {
+    "run": "mobile",
+    "route": "/careers/example-role",
+    "violations": []
+  },
+  {
+    "run": "mobile",
+    "route": "/faq",
+    "violations": []
+  },
+  {
+    "run": "mobile",
+    "route": "/hello",
+    "violations": []
+  },
+  {
+    "run": "mobile",
+    "route": "/contact",
+    "violations": []
+  },
+  {
+    "run": "mobile",
+    "route": "/contact/book",
+    "violations": []
+  },
+  {
+    "run": "mobile",
+    "route": "/contact/thank-you",
+    "violations": []
+  },
+  {
+    "run": "mobile",
+    "route": "/privacy",
+    "violations": []
+  },
+  {
+    "run": "mobile",
+    "route": "/terms",
+    "violations": []
+  },
+  {
+    "run": "mobile",
+    "route": "/cookies",
+    "violations": []
+  },
+  {
+    "run": "mobile",
+    "route": "/this-page-does-not-exist",
+    "violations": []
+  },
+  {
+    "run": "desktop-reduced",
+    "route": "/",
+    "violations": []
+  },
+  {
+    "run": "desktop-reduced",
+    "route": "/work",
+    "violations": []
+  },
+  {
+    "run": "desktop-reduced",
+    "route": "/work/project-one",
+    "violations": []
+  },
+  {
+    "run": "desktop-reduced",
+    "route": "/services",
+    "violations": []
+  },
+  {
+    "run": "desktop-reduced",
+    "route": "/services/web-development",
+    "violations": []
+  },
+  {
+    "run": "desktop-reduced",
+    "route": "/services/ecommerce",
+    "violations": []
+  },
+  {
+    "run": "desktop-reduced",
+    "route": "/process",
+    "violations": []
+  },
+  {
+    "run": "desktop-reduced",
+    "route": "/about",
+    "violations": []
+  },
+  {
+    "run": "desktop-reduced",
+    "route": "/careers",
+    "violations": []
+  },
+  {
+    "run": "desktop-reduced",
+    "route": "/careers/example-role",
+    "violations": []
+  },
+  {
+    "run": "desktop-reduced",
+    "route": "/faq",
+    "violations": []
+  },
+  {
+    "run": "desktop-reduced",
+    "route": "/hello",
+    "violations": []
+  },
+  {
+    "run": "desktop-reduced",
+    "route": "/contact",
+    "violations": []
+  },
+  {
+    "run": "desktop-reduced",
+    "route": "/contact/book",
+    "violations": []
+  },
+  {
+    "run": "desktop-reduced",
+    "route": "/contact/thank-you",
+    "violations": []
+  },
+  {
+    "run": "desktop-reduced",
+    "route": "/privacy",
+    "violations": []
+  },
+  {
+    "run": "desktop-reduced",
+    "route": "/terms",
+    "violations": []
+  },
+  {
+    "run": "desktop-reduced",
+    "route": "/cookies",
+    "violations": []
+  },
+  {
+    "run": "desktop-reduced",
+    "route": "/this-page-does-not-exist",
+    "violations": []
+  },
+  {
+    "run": "banner",
+    "route": "/cookies",
+    "violations": []
+  }
+]

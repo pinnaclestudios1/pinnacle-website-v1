@@ -1,0 +1,248 @@
+[
+  {
+    "run": "desktop",
+    "name": "preloader shows on first visit",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "run": "desktop",
+    "name": "preloader ends within ~2.5s",
+    "pass": true,
+    "detail": "2912ms incl. navigation"
+  },
+  {
+    "run": "desktop",
+    "name": "hero Dot hops off the logo and lands by 'Let's climb'",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "run": "desktop",
+    "name": "The Path motion initialised",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "run": "desktop",
+    "name": "The Climb pins",
+    "pass": true,
+    "detail": "scrolls 2160px sideways"
+  },
+  {
+    "run": "desktop",
+    "name": "nodes bloom in order as the Dot lands",
+    "pass": true,
+    "detail": "active: 0,1,2,3,4,5,6"
+  },
+  {
+    "run": "desktop",
+    "name": "Peaks elevator keeps pace with the reader",
+    "pass": true,
+    "detail": "car at 497px of 900"
+  },
+  {
+    "run": "desktop",
+    "name": "the Dot rides the elevator (peaks actor on screen)",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "run": "desktop",
+    "name": "Blueprint Room pins",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "run": "desktop",
+    "name": "build phases advance sketch → launch",
+    "pass": true,
+    "detail": "phases: 0,1,2,3,4"
+  },
+  {
+    "run": "desktop",
+    "name": "the Dot works inside the Blueprint Room",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "run": "desktop",
+    "name": "altitude meter reads 8,848m at the summit",
+    "pass": true,
+    "detail": "reads 8,848"
+  },
+  {
+    "run": "desktop",
+    "name": "summit Dot holds the flag",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "run": "desktop",
+    "name": "no console or page errors",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "run": "mobile",
+    "name": "no pinned scenes on mobile",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "run": "mobile",
+    "name": "The Climb is a vertical stack",
+    "pass": true,
+    "detail": "grid"
+  },
+  {
+    "run": "mobile",
+    "name": "no console or page errors",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "run": "reduced-motion",
+    "name": "no preloader",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "run": "reduced-motion",
+    "name": "hero Dot still reaches its spot (cross-fade, no hop)",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "run": "reduced-motion",
+    "name": "no pinned scenes",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "run": "reduced-motion",
+    "name": "all revealed content visible after scrolling",
+    "pass": true,
+    "detail": "0 still hidden"
+  },
+  {
+    "run": "reduced-motion",
+    "name": "no console or page errors",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "run": "returning-1920",
+    "name": "no preloader on a return visit",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "run": "returning-1920",
+    "name": "hero hello plays at full screen",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "run": "returning-1920",
+    "name": "no console or page errors",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "run": "layout",
+    "name": "Path trail clear of text at 390px",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "run": "layout",
+    "name": "Path trail clear of text at 768px",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "run": "layout",
+    "name": "Path trail clear of text at 900px",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "run": "layout",
+    "name": "Path trail clear of text at 1024px",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "run": "layout",
+    "name": "Path trail clear of text at 1280px",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "run": "layout",
+    "name": "Path trail clear of text at 1440px",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "run": "layout",
+    "name": "Path trail clear of text at 1920px",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "run": "mobile-motion",
+    "name": "Path Dot rides down the trail",
+    "pass": true,
+    "detail": "108 → 558px"
+  },
+  {
+    "run": "mobile-motion",
+    "name": "Climb Dot hops node to node",
+    "pass": true,
+    "detail": "nodes visited: 1,2,3,4,6"
+  },
+  {
+    "run": "mobile-motion",
+    "name": "Peaks elevator keeps pace on mobile",
+    "pass": true,
+    "detail": "car at 432px"
+  },
+  {
+    "run": "mobile-motion",
+    "name": "Blueprint builds on mobile, phase by phase",
+    "pass": true,
+    "detail": "phases: 0,1,2,3,4"
+  },
+  {
+    "run": "mobile-motion",
+    "name": "the Dot stays in the Blueprint window while it builds",
+    "pass": true,
+    "detail": "5/5"
+  },
+  {
+    "run": "continuity-desktop",
+    "name": "a Dot is on screen all the way down",
+    "pass": true,
+    "detail": "27/27 positions"
+  },
+  {
+    "run": "continuity-desktop",
+    "name": "no console or page errors",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "run": "continuity-mobile",
+    "name": "a Dot is on screen all the way down",
+    "pass": true,
+    "detail": "33/33 positions"
+  },
+  {
+    "run": "continuity-mobile",
+    "name": "no console or page errors",
+    "pass": true,
+    "detail": ""
+  }
+]

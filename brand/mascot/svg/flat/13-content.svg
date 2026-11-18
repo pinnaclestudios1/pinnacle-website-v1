@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-100 -100 200 200" width="1080" height="1080">
+<title>The Dot — Content</title>
+<defs>
+<radialGradient id="halo"><stop offset="0" stop-color="#ffd9c6" stop-opacity="0.95"/><stop offset="0.62" stop-color="#ffd9c6" stop-opacity="0.4"/><stop offset="1" stop-color="#ffd9c6" stop-opacity="0"/></radialGradient>
+<radialGradient id="shadow"><stop offset="0" stop-color="#1e1e1e" stop-opacity="0.22"/><stop offset="1" stop-color="#1e1e1e" stop-opacity="0"/></radialGradient>
+</defs>
+
+
+<g transform="translate(0 0)">
+
+<g transform="translate(0 40) scale(1 1) translate(0 -40) rotate(0)">
+
+<circle r="40" fill="#ff5b27"/>
+<path d="M-20 -4 Q-14 1 -8 -4" stroke="#1e1e1e" stroke-width="2.6" stroke-linecap="round" fill="none"/><path d="M8 -4 Q14 1 20 -4" stroke="#1e1e1e" stroke-width="2.6" stroke-linecap="round" fill="none"/><path d="M-7 12 Q0 19 7 12" stroke="#1e1e1e" stroke-width="2.4" stroke-linecap="round" fill="none"/>
+
+</g>
+
+</g>
+</svg>

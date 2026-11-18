@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-100 -100 200 200" width="1080" height="1080">
+<title>The Dot — Celebrate (flag)</title>
+<defs>
+<radialGradient id="halo"><stop offset="0" stop-color="#ffd9c6" stop-opacity="0.95"/><stop offset="0.62" stop-color="#ffd9c6" stop-opacity="0.4"/><stop offset="1" stop-color="#ffd9c6" stop-opacity="0"/></radialGradient>
+<radialGradient id="shadow"><stop offset="0" stop-color="#1e1e1e" stop-opacity="0.22"/><stop offset="1" stop-color="#1e1e1e" stop-opacity="0"/></radialGradient>
+</defs>
+
+
+<g transform="translate(0 -10)">
+
+<g transform="translate(0 40) scale(1 1) translate(0 -40) rotate(0)">
+<path d="M46 -48 L46 -4" stroke="#1e1e1e" stroke-width="2.2" stroke-linecap="round"/>
+<path d="M46 -48 L68 -41 L46 -34 Z" fill="#fbf8f2" stroke="#777775" stroke-width="1"/>
+<path d="M36 -6 Q43 -9 46 -16" stroke="#1e1e1e" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+<circle r="40" fill="#ff5b27"/>
+<path d="M-20 -2 Q-14 -11 -8 -2" stroke="#1e1e1e" stroke-width="2.6" stroke-linecap="round" fill="none"/><path d="M8 -2 Q14 -11 20 -2" stroke="#1e1e1e" stroke-width="2.6" stroke-linecap="round" fill="none"/><path d="M-9 11 Q0 23 9 11 Z" fill="#1e1e1e" stroke="#1e1e1e" stroke-width="1.6" stroke-linejoin="round"/>
+
+</g>
+<rect x="-64.4" y="-50.2" width="4.8" height="8.4" rx="1.2" fill="#ff5b27"  transform="rotate(20 -62 -46)"/><circle cx="-48" cy="-70" r="2.8" fill="#fbf8f2" stroke="#777775" stroke-width="0.6"/><rect x="-26.4" y="-84.2" width="4.8" height="8.4" rx="1.2" fill="#fbf8f2" stroke="#777775" stroke-width="0.6" transform="rotate(35 -24 -80)"/><circle cx="6" cy="-86" r="2.8" fill="#ff5b27" /><rect x="27.6" y="-82.2" width="4.8" height="8.4" rx="1.2" fill="#ff5b27"  transform="rotate(10 30 -78)"/><circle cx="58" cy="-64" r="2.8" fill="#fbf8f2" stroke="#777775" stroke-width="0.6"/><rect x="69.6" y="-40.2" width="4.8" height="8.4" rx="1.2" fill="#fbf8f2" stroke="#777775" stroke-width="0.6" transform="rotate(-30 72 -36)"/><circle cx="-74" cy="-14" r="2.8" fill="#ff5b27" /><rect x="-60.4" y="7.8" width="4.8" height="8.4" rx="1.2" fill="#fbf8f2" stroke="#777775" stroke-width="0.6" transform="rotate(-40 -58 12)"/><circle cx="74" cy="4" r="2.8" fill="#ff5b27" /><rect x="61.6" y="25.8" width="4.8" height="8.4" rx="1.2" fill="#ff5b27"  transform="rotate(-50 64 30)"/><circle cx="-70" cy="34" r="2.8" fill="#fbf8f2" stroke="#777775" stroke-width="0.6"/>
+</g>
+</svg>

@@ -1,0 +1,111 @@
+/*
+ * Pinnacle Studios — brand tokens (brief §2, §9)
+ *
+ * Raw palette first, then semantic tokens that components use.
+ * Every value marked "TODO: confirm" is a default taken from the brief's examples
+ * or the logo files and must be signed off before launch.
+ *
+ * Contrast notes (WCAG 2.2 AA, checked by hand — re-verify in phase 7):
+ *   ink #1E1E1E on cream #F6F1E7 ............ ~15:1  body text OK
+ *   ink-soft #5E5E5C on cream ............... ~5.8:1 small text OK
+ *   line #777775 on cream ................... ~4.0:1 graphics only (>= 3:1)
+ *   orange #FF5B27 on cream ................. ~2.75:1 FAILS for text and focus rings
+ *   ink #1E1E1E on orange ................... ~5.4:1 → primary button label is charcoal
+ *   cream on night #181715 .................. ~17:1
+ */
+
+:root {
+  /* ---------- Raw palette ---------- */
+  --pn-cream: #f6f1e7; /* background — TODO: confirm (brief example) */
+  --pn-cream-light: #fbf8f2; /* surface — TODO: confirm (brief example) */
+  --pn-cream-logo: #f2f0e9; /* cream nodes in the dark-bg logo */
+  --pn-grey: #777775; /* line-work, from logo — TODO: confirm (brief example was #8A8A8A) */
+  --pn-grey-text: #5e5e5c; /* secondary text; darker than line grey to pass AA */
+  --pn-charcoal: #1e1e1e; /* ink — TODO: confirm (logo wordmark is #101216) */
+  --pn-charcoal-node: #353535; /* charcoal nodes in the light-bg logo */
+  --pn-night: #181715; /* night-sky footer — TODO: confirm */
+  --pn-night-surface: #22201d;
+  --pn-night-text-soft: #a9a69e;
+  --pn-orange: #ff5b27; /* Pinnacle orange, from logo apex — TODO: confirm */
+  --pn-peach: #ffd9c6; /* glow behind the Dot only — TODO: confirm */
+  --pn-tagline-grey: #999ba2; /* "STUDIOS" in the logo (logo use only, fails AA as text) */
+
+  /* ---------- Semantic tokens (light / default world) ---------- */
+  --pn-bg: var(--pn-cream);
+  --pn-surface: var(--pn-cream-light);
+  --pn-line: var(--pn-grey);
+  --pn-ink: var(--pn-charcoal);
+  --pn-ink-soft: var(--pn-grey-text);
+  --pn-accent: var(--pn-orange);
+  --pn-accent-ink: var(--pn-charcoal); /* text on orange */
+  --pn-glow: var(--pn-peach);
+  --pn-node-fill: var(--pn-cream-light);
+  --pn-node-stroke: var(--pn-grey);
+  --pn-focus: var(--pn-charcoal);
+  --pn-logo-node: var(--pn-charcoal-node);
+  --pn-logo-wordmark: #101216; /* exact logo values — the logo is never recoloured */
+  --pn-logo-line: #777775;
+  --pn-logo-tagline: var(--pn-tagline-grey);
+
+  /* ---------- Layout ---------- */
+  --pn-max: 80rem; /* ~1280px content width */
+  --pn-gutter: clamp(1.25rem, 4vw, 3rem);
+  --pn-section: clamp(5rem, 10vw, 10rem);
+  --pn-header-h: 4rem;
+  --pn-radius-sm: 6px;
+  --pn-radius-md: 8px;
+  --pn-stroke: 1.25px; /* graphic line weight (1–1.5px) */
+
+  /* The Dot lane: the free left gutter beside the content column, where the guide Dot
+     lives so it never covers text or buttons (brief §3). */
+  --pn-dot-lane: calc(
+    max(0px, (100vw - var(--pn-max) - 2 * var(--pn-gutter)) / 2) + var(--pn-gutter)
+  );
+  --pn-dot-guide: clamp(24px, calc(var(--pn-dot-lane) - 16px), 40px); /* brief: 24–48px */
+
+  /* ---------- Motion (mirrors lib/motion/tokens.ts) ---------- */
+  --pn-dur-micro: 200ms; /* 150–250ms */
+  --pn-dur-ui: 400ms; /* 300–500ms */
+  --pn-dur-reveal: 750ms; /* 600–900ms */
+  --pn-dur-scene: 1000ms; /* 800–1200ms */
+  --pn-ease-out: cubic-bezier(0.16, 1, 0.3, 1); /* expo-out */
+  --pn-ease-in-out: cubic-bezier(0.87, 0, 0.13, 1); /* expo-in-out */
+  --pn-ease-dot: cubic-bezier(0.34, 1.56, 0.64, 1); /* springy overshoot */
+
+  /* ---------- Layers ---------- */
+  --pn-z-header: 40;
+  --pn-z-sticky: 45;
+  --pn-z-dot: 50;
+  --pn-z-curtain: 90;
+  --pn-z-grain: 100;
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --pn-header-h: 4.5rem;
+  }
+}
+
+/* Mobile gets lighter, shorter motion (brief §9 Rules). */
+@media (max-width: 767px) {
+  :root {
+    --pn-dur-reveal: 600ms;
+    --pn-dur-scene: 800ms;
+  }
+}
+
+/* Night world — footer "night sky at the summit" and the future Lab page. */
+.theme-night {
+  --pn-bg: var(--pn-night);
+  --pn-surface: var(--pn-night-surface);
+  --pn-line: var(--pn-grey);
+  --pn-ink: var(--pn-cream-logo);
+  --pn-ink-soft: var(--pn-night-text-soft);
+  --pn-node-fill: var(--pn-night);
+  --pn-node-stroke: var(--pn-cream-logo);
+  --pn-focus: var(--pn-cream-logo);
+  --pn-logo-node: var(--pn-cream-logo);
+  --pn-logo-wordmark: var(--pn-cream-logo);
+  background-color: var(--pn-bg);
+  color: var(--pn-ink);
+}

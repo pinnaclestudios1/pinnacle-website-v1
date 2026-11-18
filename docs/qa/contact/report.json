@@ -1,0 +1,230 @@
+[
+  {
+    "run": "brief",
+    "name": "starts on step 1 (one question at a time)",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "run": "brief",
+    "name": "Next without an answer shows an error and stays",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "run": "brief",
+    "name": "reaches the review step",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "run": "brief",
+    "name": "focus moves to the current question",
+    "pass": true,
+    "detail": "brief-step-5"
+  },
+  {
+    "run": "brief",
+    "name": "Send without consent is blocked",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "run": "brief",
+    "name": "delivers to team email, auto-reply, CRM and Slack",
+    "pass": true,
+    "detail": "/crm, /resend/emails, /resend/emails, /slack"
+  },
+  {
+    "run": "brief",
+    "name": "team email has the brief and reply-to",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "run": "brief",
+    "name": "auto-reply goes to the client with next steps + Dot signature",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "run": "brief",
+    "name": "Resend called with the API key",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "run": "brief",
+    "name": "CRM payload is complete and signed",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "run": "brief",
+    "name": "high-value lead flagged in Slack (call within 2 hours)",
+    "pass": true,
+    "detail": "🔥 High-value lead — call within 2 hours: Test Climber (PB-261118-QAWX)"
+  },
+  {
+    "run": "brief",
+    "name": "lands on the thank-you page with a reference",
+    "pass": true,
+    "detail": "http://localhost:3100/contact/thank-you?ref=PB-261118-QAWX"
+  },
+  {
+    "run": "brief",
+    "name": "draft cleared after sending",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "run": "brief",
+    "name": "no console or page errors",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "run": "brief-scoring",
+    "name": "small-budget lead is not flagged high-value",
+    "pass": true,
+    "detail": "New lead: Test Climber (PB-261118-VUU4)"
+  },
+  {
+    "run": "draft",
+    "name": "progress is saved and restored after leaving",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "run": "spam",
+    "name": "honeypot: bot sees success, nothing is delivered",
+    "pass": true,
+    "detail": "0 requests"
+  },
+  {
+    "run": "spam",
+    "name": "time trap: an instant submission is dropped",
+    "pass": true,
+    "detail": "0 requests"
+  },
+  {
+    "run": "home-quick",
+    "name": "quick enquiry delivered to all channels",
+    "pass": true,
+    "detail": "/resend/emails, /crm, /slack, /resend/emails"
+  },
+  {
+    "run": "home-quick",
+    "name": "success: pyramid glows, Dot celebrates, thank-you message",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "run": "home-quick",
+    "name": "no console or page errors",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "run": "home-quick",
+    "name": "rate limit: 6th enquiry in 10 minutes is refused",
+    "pass": true,
+    "detail": "ok,ok,ok,ok,limited"
+  },
+  {
+    "run": "newsletter",
+    "name": "subscriber added to the Brevo list",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "run": "newsletter",
+    "name": "confirmation shown",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "run": "deck",
+    "name": "deck link emailed to the requester",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "run": "deck",
+    "name": "team is told about the request (CRM/Slack)",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "run": "deck",
+    "name": "confirmation shown",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "run": "careers",
+    "name": "invalid portfolio link is rejected with a clear message",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "run": "careers",
+    "name": "fields keep their values after a validation error",
+    "pass": true,
+    "detail": "name field: \"Ada Applicant\""
+  },
+  {
+    "run": "careers",
+    "name": "application goes to the careers inbox",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "run": "careers",
+    "name": "applications never enter the sales CRM",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "run": "careers",
+    "name": "applicant gets a thank-you email",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "run": "careers",
+    "name": "no console or page errors",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "run": "no-js",
+    "name": "all questions shown as one form",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "run": "no-js",
+    "name": "brief submits and confirms without JavaScript",
+    "pass": true,
+    "detail": "4 requests"
+  },
+  {
+    "run": "mobile",
+    "name": "mobile flow + inline errors work",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "run": "mobile",
+    "name": "no console or page errors",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "run": "unconfigured-production",
+    "name": "refuses instead of silently losing the lead",
+    "pass": true,
+    "detail": ""
+  }
+]

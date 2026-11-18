@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-100 -100 200 200" width="1080" height="1080">
+<title>The Dot — Surprised</title>
+<defs>
+<radialGradient id="halo"><stop offset="0" stop-color="#ffd9c6" stop-opacity="0.95"/><stop offset="0.62" stop-color="#ffd9c6" stop-opacity="0.4"/><stop offset="1" stop-color="#ffd9c6" stop-opacity="0"/></radialGradient>
+<radialGradient id="shadow"><stop offset="0" stop-color="#1e1e1e" stop-opacity="0.22"/><stop offset="1" stop-color="#1e1e1e" stop-opacity="0"/></radialGradient>
+</defs>
+
+
+<g transform="translate(0 0)">
+
+<g transform="translate(0 40) scale(1 1) translate(0 -40) rotate(0)">
+
+<circle r="40" fill="#ff5b27"/>
+<ellipse cx="-14" cy="-5" rx="6.136" ry="8.85" fill="#1e1e1e"/><circle cx="-11.876" cy="-8.54" r="2.124" fill="#fbf8f2"/><ellipse cx="14" cy="-5" rx="6.136" ry="8.85" fill="#1e1e1e"/><circle cx="16.124" cy="-8.54" r="2.124" fill="#fbf8f2"/><ellipse cx="0" cy="15" rx="3.4" ry="4.4" fill="#1e1e1e"/>
+
+</g>
+<path d="M-22 -52 L-26 -64" stroke="#777775" stroke-width="3" stroke-linecap="round"/><path d="M0 -56 L0 -70" stroke="#777775" stroke-width="3" stroke-linecap="round"/><path d="M22 -52 L26 -64" stroke="#777775" stroke-width="3" stroke-linecap="round"/>
+</g>
+</svg>

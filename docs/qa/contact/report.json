@@ -63,13 +63,13 @@
     "run": "brief",
     "name": "high-value lead flagged in Slack (call within 2 hours)",
     "pass": true,
-    "detail": "🔥 High-value lead — call within 2 hours: Test Climber (PB-261118-QAWX)"
+    "detail": "🔥 High-value lead — call within 2 hours: Test Climber (PB-261118-8ERH)"
   },
   {
     "run": "brief",
     "name": "lands on the thank-you page with a reference",
     "pass": true,
-    "detail": "http://localhost:3100/contact/thank-you?ref=PB-261118-QAWX"
+    "detail": "http://localhost:3100/contact/thank-you?ref=PB-261118-8ERH"
   },
   {
     "run": "brief",
@@ -87,7 +87,7 @@
     "run": "brief-scoring",
     "name": "small-budget lead is not flagged high-value",
     "pass": true,
-    "detail": "New lead: Test Climber (PB-261118-VUU4)"
+    "detail": "New lead: Test Climber (PB-261118-2G8N)"
   },
   {
     "run": "draft",
@@ -130,6 +130,12 @@
     "name": "rate limit: 6th enquiry in 10 minutes is refused",
     "pass": true,
     "detail": "ok,ok,ok,ok,limited"
+  },
+  {
+    "run": "home-quick",
+    "name": "rate limit is shared through Redis (Upstash REST)",
+    "pass": true,
+    "detail": "16 Redis commands"
   },
   {
     "run": "newsletter",

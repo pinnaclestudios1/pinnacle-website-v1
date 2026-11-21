@@ -70,7 +70,9 @@ export function LoopVideo({
       muted
       loop
       playsInline
-      preload="metadata"
+      // Nothing downloads until it plays (on screen / on hover): the poster shows meanwhile,
+      // and videos never compete with the page's first paint.
+      preload="none"
       aria-label={label}
       controls={reduced}
       className={className}

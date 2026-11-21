@@ -15,6 +15,12 @@ type Props = Omit<DotActorViewProps, "size" | "onActiveChange"> & {
   width: string;
   /** Once the Dot has been here, keep the logo's apex empty (the hero: the Dot hopped off the logo). */
   keepApexEmpty?: boolean;
+  /**
+   * Tilt toward the cursor in 3D (desktop, components/extras/tilt.ts), pivoting on the
+   * apex so the Dot sitting there never moves. Put `data-tilt-area` on the section that
+   * should respond to the pointer.
+   */
+  tilt?: boolean;
   className?: string;
 };
 
@@ -23,7 +29,13 @@ type Props = Omit<DotActorViewProps, "size" | "onActiveChange"> & {
  * While the Dot is on screen the logo's own apex is hidden, so there is never
  * a second orange circle. Used by the hero, the home summit and the footer.
  */
-export function MarkWithDot({ width, keepApexEmpty = false, className, ...dotProps }: Props) {
+export function MarkWithDot({
+  width,
+  keepApexEmpty = false,
+  tilt = false,
+  className,
+  ...dotProps
+}: Props) {
   const [dotActive, setDotActive] = useState(false);
   const [visited, setVisited] = useState(false);
   const onActiveChange = useCallback((active: boolean) => {
@@ -35,7 +47,12 @@ export function MarkWithDot({ width, keepApexEmpty = false, className, ...dotPro
       className={cn("relative", className)}
       style={{ width: "var(--mark-w)", ["--mark-w" as string]: width } as CSSProperties}
     >
-      <Mark className="w-full" hideApex={dotActive || (keepApexEmpty && visited)} />
+      <div
+        {...(tilt ? { "data-tilt": "", "data-tilt-max": "9" } : {})}
+        style={tilt ? { transformOrigin: `${APEX_LEFT} ${APEX_TOP}` } : undefined}
+      >
+        <Mark className="w-full" hideApex={dotActive || (keepApexEmpty && visited)} />
+      </div>
       <div
         className="absolute -translate-x-1/2 -translate-y-1/2"
         style={{ left: APEX_LEFT, top: APEX_TOP }}

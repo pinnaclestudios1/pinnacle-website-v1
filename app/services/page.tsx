@@ -10,6 +10,7 @@ import { DraftNotice } from "@/components/ui/DraftNotice";
 import { Todo } from "@/components/ui/Todo";
 import { engagementModels, industries } from "@/content/studio";
 import { getServices } from "@/lib/cms";
+import { demo } from "@/lib/demo";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
@@ -20,6 +21,8 @@ export const metadata = pageMetadata({
 });
 
 /** Services — The Climb (brief §6): every service as a node on one mountain path. */
+const shownIndustries = industries.length ? industries : (demo?.industries ?? []);
+
 export default async function ServicesPage() {
   const services = await getServices();
   const draft = services.some((s) => s.draft);
@@ -78,7 +81,7 @@ export default async function ServicesPage() {
             ))}
           </ul>
           <p className="mt-8 text-sm text-ink-soft">
-            Projects from <Todo>“from ₹X / $X” — pricing decision</Todo>
+            Projects from {demo?.projectsFrom ?? <Todo>“from ₹X / $X” — pricing decision</Todo>}
           </p>
         </Container>
       </section>
@@ -89,9 +92,9 @@ export default async function ServicesPage() {
             <h2 id="industries" className="text-h2">
               Industries we climb with
             </h2>
-            {industries.length ? (
+            {shownIndustries.length ? (
               <ul className="mt-8 flex flex-wrap gap-2">
-                {industries.map((i) => (
+                {shownIndustries.map((i) => (
                   <li key={i} className="rounded-md border border-line/60 px-3 py-1.5 text-sm">
                     {i}
                   </li>

@@ -8,6 +8,11 @@ import { MediaFrame } from "./MediaFrame";
 /**
  * A project "window" (brief §5 Stage 4, §6 Work): thumbnail or hover video, name,
  * client, tags, one headline result. Hover makes the Dot curious; click dives in.
+ *
+ * 3D: the window settles from tilted-back to face-on as it scrolls in (`data-depth`,
+ * CSS scroll-driven, runs off the main thread), and on desktop tilts toward the cursor
+ * with a soft light sheen (`data-tilt`, components/extras/tilt.ts). Both are off under
+ * reduced motion.
  */
 export function ProjectCard({
   project,
@@ -36,15 +41,21 @@ export function ProjectCard({
       dive
       data-dot-curious=""
       data-project={project.slug}
+      data-tilt-area=""
       className={cn("group block rounded-md", className)}
     >
-      <MediaFrame
-        media={project.preview ?? project.hero}
-        ratio={ratio}
-        hoverVideo
-        variant={index}
-        sizes={compact ? "(min-width: 768px) 33vw, 100vw" : undefined}
-      />
+      <div data-depth="">
+        <div data-tilt="" className="relative overflow-hidden rounded-md">
+          <MediaFrame
+            media={project.preview ?? project.hero}
+            ratio={ratio}
+            hoverVideo
+            variant={index}
+            sizes={compact ? "(min-width: 768px) 33vw, 100vw" : undefined}
+          />
+          <span data-tilt-glare="" aria-hidden className="tilt-glare" />
+        </div>
+      </div>
       <div className={cn("mt-5 grid gap-3", !compact && "sm:grid-cols-[1fr_auto] sm:items-end")}>
         <div>
           <p className="label text-ink-soft">

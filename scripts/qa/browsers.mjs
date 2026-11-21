@@ -13,8 +13,10 @@ import { existsSync } from "node:fs";
 import { mkdir, writeFile } from "node:fs/promises";
 import path from "node:path";
 import puppeteer from "puppeteer-core";
+import { detailRoutes } from "./routes.mjs";
 
 const BASE = process.env.BASE_URL ?? "http://localhost:3000";
+const DETAIL = await detailRoutes(BASE);
 const OUT = path.resolve("docs/qa/browsers");
 const BROWSERS = [
   {
@@ -33,13 +35,13 @@ const BROWSERS = [
 const ROUTES = [
   "/",
   "/work",
-  "/work/project-one",
+  DETAIL.project,
   "/services",
   "/services/web-development",
   "/process",
   "/about",
   "/careers",
-  "/careers/example-role",
+  DETAIL.job,
   "/faq",
   "/hello",
   "/contact",

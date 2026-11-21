@@ -11,7 +11,7 @@
   },
   {
     "run": "desktop",
-    "route": "/work/project-one",
+    "route": "/work/kestrel-analytics",
     "violations": []
   },
   {
@@ -46,7 +46,7 @@
   },
   {
     "run": "desktop",
-    "route": "/careers/example-role",
+    "route": "/careers/senior-product-designer",
     "violations": []
   },
   {
@@ -106,7 +106,7 @@
   },
   {
     "run": "mobile",
-    "route": "/work/project-one",
+    "route": "/work/kestrel-analytics",
     "violations": []
   },
   {
@@ -141,7 +141,7 @@
   },
   {
     "run": "mobile",
-    "route": "/careers/example-role",
+    "route": "/careers/senior-product-designer",
     "violations": []
   },
   {
@@ -201,7 +201,7 @@
   },
   {
     "run": "desktop-reduced",
-    "route": "/work/project-one",
+    "route": "/work/kestrel-analytics",
     "violations": []
   },
   {
@@ -236,7 +236,7 @@
   },
   {
     "run": "desktop-reduced",
-    "route": "/careers/example-role",
+    "route": "/careers/senior-product-designer",
     "violations": []
   },
   {

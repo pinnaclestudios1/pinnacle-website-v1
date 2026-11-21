@@ -1,4 +1,5 @@
 import { TeamGrid } from "@/components/about/TeamGrid";
+import { MediaFrame } from "@/components/cms/MediaFrame";
 import { DotIllustration, type DotPose } from "@/components/dot/DotIllustration";
 import { PageIntro } from "@/components/layout/PageIntro";
 import { Reveal } from "@/components/motion/Reveal";
@@ -9,6 +10,7 @@ import { DraftNotice } from "@/components/ui/DraftNotice";
 import { Todo } from "@/components/ui/Todo";
 import { values } from "@/content/studio";
 import { getTeam } from "@/lib/cms";
+import { demo } from "@/lib/demo";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
@@ -26,7 +28,7 @@ export default async function AboutPage() {
       <PageIntro
         eyebrow="About — The Guides"
         title="The guides."
-        intro={<Todo>origin story — why Pinnacle exists (2–3 sentences)</Todo>}
+        intro={demo?.story ?? <Todo>origin story — why Pinnacle exists (2–3 sentences)</Todo>}
       />
 
       <Container
@@ -39,13 +41,13 @@ export default async function AboutPage() {
             Mission
           </h2>
           <p className="mt-4 font-display text-h3">
-            <Todo>mission statement</Todo>
+            {demo?.mission ?? <Todo>mission statement</Todo>}
           </p>
         </div>
         <div>
           <h2 className="label font-sans text-ink-soft">Vision</h2>
           <p className="mt-4 font-display text-h3">
-            <Todo>vision statement</Todo>
+            {demo?.vision ?? <Todo>vision statement</Todo>}
           </p>
         </div>
       </Container>
@@ -92,9 +94,20 @@ export default async function AboutPage() {
         <ul className="mt-10 grid grid-cols-2 gap-4 md:grid-cols-4">
           {[0, 1, 2, 3].map((i) => (
             <li key={i} className={i === 0 ? "col-span-2 row-span-2" : ""}>
-              <div className="grid h-full min-h-40 place-items-center rounded-md border border-dashed border-line bg-surface p-6 text-center">
-                <Todo>studio photo</Todo>
-              </div>
+              {demo ? (
+                <MediaFrame
+                  media={demo.studioPhotos[i]!}
+                  ratio="4 / 3"
+                  sizes={
+                    i === 0 ? "(min-width: 768px) 50vw, 100vw" : "(min-width: 768px) 25vw, 50vw"
+                  }
+                  className="h-full"
+                />
+              ) : (
+                <div className="grid h-full min-h-40 place-items-center rounded-md border border-dashed border-line bg-surface p-6 text-center">
+                  <Todo>studio photo</Todo>
+                </div>
+              )}
             </li>
           ))}
         </ul>
@@ -110,10 +123,10 @@ export default async function AboutPage() {
               {[0, 1, 2].map((i) => (
                 <li key={i}>
                   <p className="label text-ink-soft">
-                    <Todo>year</Todo>
+                    {demo?.milestones[i]?.year ?? <Todo>year</Todo>}
                   </p>
                   <p className="mt-2 font-display text-h3">
-                    <Todo>milestone (real numbers only)</Todo>
+                    {demo?.milestones[i]?.text ?? <Todo>milestone (real numbers only)</Todo>}
                   </p>
                 </li>
               ))}

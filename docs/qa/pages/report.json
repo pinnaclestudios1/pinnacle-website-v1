@@ -7,9 +7,9 @@
   },
   {
     "run": "desktop",
-    "name": "/work/project-one",
+    "name": "/work/kestrel-analytics",
     "pass": true,
-    "detail": "Case study (draft) — Pinnacle Studios"
+    "detail": "Revenue analytics that explain themselves for Kestrel Analytics — Pinnacle Studios"
   },
   {
     "run": "desktop",
@@ -55,9 +55,9 @@
   },
   {
     "run": "desktop",
-    "name": "/careers/example-role",
+    "name": "/careers/senior-product-designer",
     "pass": true,
-    "detail": "Open role (draft) — Pinnacle Studios"
+    "detail": "Senior Product Designer — Pinnacle Studios"
   },
   {
     "run": "desktop",
@@ -115,9 +115,9 @@
   },
   {
     "run": "mobile",
-    "name": "/work/project-one",
+    "name": "/work/kestrel-analytics",
     "pass": true,
-    "detail": "Case study (draft) — Pinnacle Studios"
+    "detail": "Revenue analytics that explain themselves for Kestrel Analytics — Pinnacle Studios"
   },
   {
     "run": "mobile",
@@ -163,9 +163,9 @@
   },
   {
     "run": "mobile",
-    "name": "/careers/example-role",
+    "name": "/careers/senior-product-designer",
     "pass": true,
-    "detail": "Open role (draft) — Pinnacle Studios"
+    "detail": "Senior Product Designer — Pinnacle Studios"
   },
   {
     "run": "mobile",
@@ -219,7 +219,7 @@
     "run": "work",
     "name": "platform filter narrows the grid and updates the URL",
     "pass": true,
-    "detail": "3 → 1"
+    "detail": "5 → 1"
   },
   {
     "run": "work",
@@ -243,7 +243,7 @@
     "run": "case-study",
     "name": "placeholder case study is noindex",
     "pass": true,
-    "detail": "noindex, follow"
+    "detail": "noindex, nofollow"
   },
   {
     "run": "faq",

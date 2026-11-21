@@ -19,6 +19,8 @@ npm run qa:keyboard   # tab order, focus rings, skip link, menu focus, reduced m
 npm run qa:browsers   # Chrome, Edge, Firefox (installed browsers), every route
 npm run qa:lighthouse # mobile + desktop reports → docs/qa/lighthouse
 npm run qa:todos      # every TODO marker → docs/qa/TODO-INVENTORY.md
+npm run qa:smooth     # scroll smoothness: frame times, jank, forced style/layout work
+npm run demo:media    # redraw the demo mockups, loops and portraits into public/demo
 npm run brand:mascot  # the Dot pose pack → brand/mascot
 ```
 

@@ -18,22 +18,35 @@ export const init: SceneInit = (root, { reduced }) => {
   const lane = root.querySelector<HTMLElement>("[data-path-lane]");
   const clip = root.querySelector<HTMLElement>("[data-path-clip]");
   const svg = root.querySelector<SVGSVGElement>("[data-path-svg]");
-  const measure = root.querySelector<SVGPathElement>("[data-path-measure]");
+  const trailPath = root.querySelector<SVGPathElement>("[data-path-measure]");
   const rider = root.querySelector<HTMLElement>("[data-path-dot]");
-  if (!lane || !clip || !svg || !measure || !rider) return () => {};
+  if (!lane || !clip || !svg || !trailPath || !rider) return () => {};
 
-  const length = measure.getTotalLength();
+  const length = trailPath.getTotalLength();
+
+  // Where the clip box sits inside the lane — measured once per refresh (resize, pins,
+  // fonts), so placing the Dot on every scroll frame reads no layout at all.
+  let box = { left: 0, top: 0, width: 1, height: 1 };
+  const measureBox = () => {
+    const c = clip.getBoundingClientRect();
+    const base = lane.getBoundingClientRect();
+    // Undo the reveal's own shift so the box is where the trail really is.
+    const shift = ((Number(gsap.getProperty(clip, "yPercent")) || 0) / 100) * clip.offsetHeight;
+    box = {
+      left: c.left - base.left,
+      top: c.top - shift - base.top,
+      width: c.width,
+      height: c.height,
+    };
+  };
 
   /** Put the Dot on the trail at progress t (0 = top, 1 = bottom) and reveal the trail down to it. */
   const place = (t: number, reveal = true) => {
-    const p = measure.getPointAtLength(length * Math.min(1, Math.max(0, t)));
-    // Measure without the reveal transforms (they cancel out for the svg, but be exact).
-    const box = clip.getBoundingClientRect();
-    const base = lane.getBoundingClientRect();
-    const shift = ((Number(gsap.getProperty(clip, "yPercent")) || 0) / 100) * clip.offsetHeight;
-    const x = box.left - base.left + (p.x / 200) * box.width;
-    const y = box.top - shift - base.top + (p.y / 1000) * box.height;
-    gsap.set(rider, { x, y });
+    const p = trailPath.getPointAtLength(length * Math.min(1, Math.max(0, t)));
+    gsap.set(rider, {
+      x: box.left + (p.x / 200) * box.width,
+      y: box.top + (p.y / 1000) * box.height,
+    });
     if (reveal) {
       const hidden = (1 - p.y / 1000) * 100; // % of the trail below the Dot
       gsap.set(clip, { yPercent: -hidden });
@@ -42,14 +55,18 @@ export const init: SceneInit = (root, { reduced }) => {
   };
 
   if (reduced) {
-    place(1, false);
-    const onResize = () => place(1, false);
-    window.addEventListener("resize", onResize);
-    return () => window.removeEventListener("resize", onResize);
+    const settle = () => {
+      measureBox();
+      place(1, false);
+    };
+    settle();
+    window.addEventListener("resize", settle);
+    return () => window.removeEventListener("resize", settle);
   }
 
   let cancelled = false;
   let tween: gsap.core.Tween | null = null;
+  measureBox();
   place(0);
 
   void loadScrollTrigger().then(() => {
@@ -64,9 +81,12 @@ export const init: SceneInit = (root, { reduced }) => {
         trigger: lane,
         start: "top center",
         end: "bottom center",
-        scrub: 0.3,
+        scrub: 0.4,
         invalidateOnRefresh: true,
-        onRefresh: () => place(progress.t),
+        onRefresh: () => {
+          measureBox();
+          place(progress.t);
+        },
       },
     });
     refreshScrollTriggers();

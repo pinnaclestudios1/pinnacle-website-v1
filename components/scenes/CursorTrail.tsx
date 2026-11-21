@@ -26,19 +26,24 @@ export function CursorTrail() {
     let frame = 0;
     let inside = false;
     let lastMove = 0;
+    let lastTick = 0;
 
-    const tick = () => {
-      const now = performance.now();
+    const tick = (now: number) => {
+      // Same feel at 60, 120 or 144 Hz: the easing step scales with the frame time.
+      const dt = lastTick ? Math.min(50, now - lastTick) : 16.7;
+      lastTick = now;
+      const k = 1 - Math.pow(0.65, dt / 16.7);
       const idle = now - lastMove > 600;
       pts.forEach((p, i) => {
         const lead = i === 0 ? target : pts[i - 1]!;
-        p.x += (lead.x - p.x) * 0.35;
-        p.y += (lead.y - p.y) * 0.35;
+        p.x += (lead.x - p.x) * k;
+        p.y += (lead.y - p.y) * k;
         const d = dots[i]!;
         d.style.transform = `translate3d(${p.x}px, ${p.y}px, 0) scale(${1 - i / (COUNT * 1.4)})`;
         d.style.opacity = idle ? "0" : String(0.35 * (1 - i / COUNT));
       });
       frame = inside || !idle ? requestAnimationFrame(tick) : 0;
+      if (!frame) lastTick = 0;
     };
 
     const onMove = (e: PointerEvent) => {

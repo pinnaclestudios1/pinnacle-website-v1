@@ -7,13 +7,13 @@
   },
   {
     "run": "desktop",
-    "name": "preloader ends within ~2.5s",
+    "name": "preloader ends ~2.5s after first paint",
     "pass": true,
-    "detail": "2912ms incl. navigation"
+    "detail": "2442ms after first paint, 2897ms incl. navigation"
   },
   {
     "run": "desktop",
-    "name": "hero Dot hops off the logo and lands by 'Let's climb'",
+    "name": "hero Dot rises on the summit and settles there",
     "pass": true,
     "detail": ""
   },
@@ -207,7 +207,7 @@
     "run": "mobile-motion",
     "name": "Peaks elevator keeps pace on mobile",
     "pass": true,
-    "detail": "car at 432px"
+    "detail": "car at 433px"
   },
   {
     "run": "mobile-motion",
@@ -237,7 +237,7 @@
     "run": "continuity-mobile",
     "name": "a Dot is on screen all the way down",
     "pass": true,
-    "detail": "33/33 positions"
+    "detail": "34/34 positions"
   },
   {
     "run": "continuity-mobile",

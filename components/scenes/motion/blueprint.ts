@@ -83,6 +83,16 @@ export const init: SceneInit = (root, { reduced, desktop }) => {
           },
     });
 
+    // 3D (desktop): the window starts tilted back in perspective, like a plan on a desk,
+    // and turns to face the visitor as the build reaches the design phase.
+    if (desktop) {
+      tl.fromTo(
+        win,
+        { rotationX: 14, rotationY: -10, transformPerspective: 1600, transformOrigin: "50% 60%" },
+        { rotationX: 0, rotationY: 0, duration: 2.2, ease: "power2.inOut" },
+        0,
+      );
+    }
     tl.to(sketchRects, { opacity: 1, duration: 0.7, stagger: 0.03 }, 0) // 0 sketch
       .to(wires, { opacity: 1, duration: 0.6, stagger: 0.04 }, 1) // 1 wireframe
       .to(sketch, { opacity: 0.15, duration: 0.5 }, 1.1)

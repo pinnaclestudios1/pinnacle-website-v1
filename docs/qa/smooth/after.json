@@ -1,0 +1,47 @@
+[
+  {
+    "run": "desktop",
+    "route": "/",
+    "frames": 829,
+    "fps": 141,
+    "p95FrameMs": 7,
+    "jankyPct": 0.2,
+    "longTasks": 0,
+    "blockingMs": 0,
+    "layouts": 1329,
+    "styleRecalcs": 3405,
+    "layoutMs": 170,
+    "styleMs": 717,
+    "scriptMs": 478
+  },
+  {
+    "run": "desktop",
+    "route": "/process",
+    "frames": 544,
+    "fps": 144,
+    "p95FrameMs": 7,
+    "jankyPct": 0,
+    "longTasks": 0,
+    "blockingMs": 0,
+    "layouts": 547,
+    "styleRecalcs": 1355,
+    "layoutMs": 29,
+    "styleMs": 231,
+    "scriptMs": 285
+  },
+  {
+    "run": "mobile-4x",
+    "route": "/",
+    "frames": 572,
+    "fps": 76,
+    "p95FrameMs": 21,
+    "jankyPct": 2.8,
+    "longTasks": 0,
+    "blockingMs": 0,
+    "layouts": 411,
+    "styleRecalcs": 1864,
+    "layoutMs": 115,
+    "styleMs": 1280,
+    "scriptMs": 1273
+  }
+]

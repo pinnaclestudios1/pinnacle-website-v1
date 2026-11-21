@@ -1,17 +1,17 @@
 # TODO inventory
 
-Generated 2026-11-18 by `npm run qa:todos` — 184 markers in 51 files.
+Generated 2026-11-21 by `npm run qa:todos` — 184 markers in 52 files.
 
 Everything here is visible on the site as a dashed `TODO` tag, or is a code comment that blocks launch. `docs/TODO.md` is the short, human list of what the studio needs to provide; this file is the exhaustive one.
 
 | Group | Count |
 | --- | --- |
 | Legal review | 10 |
-| Accounts, keys and services | 24 |
+| Accounts, keys and services | 23 |
 | Decisions | 11 |
-| Content and assets to supply | 110 |
+| Content and assets to supply | 109 |
 | Copy and values to confirm | 26 |
-| Other | 3 |
+| Other | 5 |
 
 ## Legal review (10)
 
@@ -28,7 +28,7 @@ Everything here is visible on the site as a dashed `TODO` tag, or is a code comm
 | `content/seed/faqs.ts:73` | "TODO: confirm IP-transfer terms (e.g. on final payment).", |
 | `content/seed/services.ts:100` | answer: ["TODO: confirm ownership terms (see the FAQ page)."], |
 
-## Accounts, keys and services (24)
+## Accounts, keys and services (23)
 
 | Where | What |
 | --- | --- |
@@ -48,14 +48,13 @@ Everything here is visible on the site as a dashed `TODO` tag, or is a code comm
 | `lib/server/config.ts:14` | to: env("CONTACT_TO_EMAIL"), // team inbox — TODO |
 | `lib/server/config.ts:22` | webhook: env("CRM_WEBHOOK_URL"), // HubSpot / Zoho / Notion via Zapier/Make, or a direct endpoint — TODO: choose |
 | `lib/server/leads.ts:221` | Newsletter (provider: Brevo — TODO: confirm vs Mailchimp). |
-| `lib/server/spam.ts:12` | hosting add a shared store (e.g. Upstash Redis) before launch. TODO(launch). |
-| `lib/server/spam.ts:45` | if (!config.turnstileSecret) return true; // not configured yet — TODO(keys) |
+| `lib/server/spam.ts:76` | if (!config.turnstileSecret) return true; // not configured yet — TODO(keys) |
 | `sanity/env.ts:4` | TODO(keys): create the project at sanity.io/manage and set these in the hosting env. |
 | `next.config.ts:104` | TODO: confirm — add `preload` to HSTS only after the production domain is final. |
-| `.env.example:4` | TODO: confirm production domain |
-| `.env.example:14` | CONTACT_FROM_EMAIL="Asha at Pinnacle <hello@your-domain>" # TODO: verified sending domain |
-| `.env.example:45` | --- Phase 6 (Analytics / monitoring) — TODO: choose and provide --- |
-| `.env.example:52` | SENTRY_DSN= # TODO: error monitoring (not wired yet) |
+| `.env.example:6` | TODO: confirm production domain |
+| `.env.example:21` | CONTACT_FROM_EMAIL="Asha at Pinnacle <hello@your-domain>" # TODO: verified sending domain |
+| `.env.example:58` | --- Phase 6 (Analytics / monitoring) — TODO: choose and provide --- |
+| `.env.example:65` | SENTRY_DSN= # TODO: error monitoring (not wired yet) |
 
 ## Decisions (11)
 
@@ -63,7 +62,7 @@ Everything here is visible on the site as a dashed `TODO` tag, or is a code comm
 | --- | --- |
 | `app/privacy/page.tsx:106` | Placeholder: HubSpot / Zoho / Notion |
 | `app/privacy/page.tsx:118` | Placeholder: GA4 + Microsoft Clarity, or Plausible |
-| `app/services/page.tsx:81` | Placeholder: “from ₹X / $X” — pricing decision |
+| `app/services/page.tsx:84` | Placeholder: “from ₹X / $X” — pricing decision |
 | `app/services/[slug]/page.tsx:170` | Placeholder: starting price — pricing decision |
 | `lib/cms/types.ts:74` | e.g. "From ₹3L / $5k" — TODO: pricing decision (brief §12 open decisions). |
 | `lib/forms/brief.ts:155` | TODO: confirm thresholds with the studio after the first month's baseline. |
@@ -73,20 +72,20 @@ Everything here is visible on the site as a dashed `TODO` tag, or is a code comm
 | `content/seed/services.ts:5` | Everything here is "TODO: confirm"; prices are left empty pending the pricing decision. |
 | `content/studio.ts:105` | { title: "Grow on purpose", text: "Time and budget for learning — TODO: confirm specifics." }, |
 
-## Content and assets to supply (110)
+## Content and assets to supply (109)
 
 | Where | What |
 | --- | --- |
-| `app/about/page.tsx:20` | About — The Guides (brief §6). Real story, people and numbers are TODO (never invented). |
-| `app/about/page.tsx:29` | Placeholder: origin story — why Pinnacle exists (2–3 sentences) |
-| `app/about/page.tsx:42` | Placeholder: mission statement |
-| `app/about/page.tsx:48` | Placeholder: vision statement |
-| `app/about/page.tsx:96` | Placeholder: studio photo |
-| `app/about/page.tsx:113` | Placeholder: year |
-| `app/about/page.tsx:116` | Placeholder: milestone (real numbers only) |
-| `app/about/page.tsx:135` | Placeholder: {k.toLowerCase()} |
+| `app/about/page.tsx:22` | About — The Guides (brief §6). Real story, people and numbers are TODO (never invented). |
+| `app/about/page.tsx:31` | Placeholder: origin story — why Pinnacle exists (2–3 sentences) |
+| `app/about/page.tsx:44` | Placeholder: mission statement |
+| `app/about/page.tsx:50` | Placeholder: vision statement |
+| `app/about/page.tsx:108` | Placeholder: studio photo |
+| `app/about/page.tsx:126` | Placeholder: year |
+| `app/about/page.tsx:129` | Placeholder: milestone (real numbers only) |
+| `app/about/page.tsx:148` | Placeholder: {k.toLowerCase()} |
 | `app/actions/forms.ts:25` | : "Please try again in a few minutes."; // TODO: contact email |
-| `app/careers/page.tsx:79` | Placeholder: type · location |
+| `app/careers/page.tsx:80` | Placeholder: type · location |
 | `app/careers/[slug]/page.tsx:45` | Placeholder: {title} |
 | `app/careers/[slug]/page.tsx:47` | Placeholder: type · location |
 | `app/contact/page.tsx:42` | TODO: next/image of contact.replier.photo |
@@ -103,8 +102,8 @@ Everything here is visible on the site as a dashed `TODO` tag, or is a code comm
 | `app/privacy/page.tsx:102` | Placeholder: hosting provider (e.g. Vercel) |
 | `app/privacy/page.tsx:172` | Placeholder: response time |
 | `app/privacy/page.tsx:182` | Placeholder: name, email |
-| `app/process/page.tsx:46` | Placeholder: typical duration |
-| `app/services/page.tsx:102` | Placeholder: industries served |
+| `app/process/page.tsx:47` | Placeholder: typical duration |
+| `app/services/page.tsx:105` | Placeholder: industries served |
 | `app/services/[slug]/page.tsx:167` | Placeholder: engagement model |
 | `app/services/[slug]/page.tsx:188` | Placeholder: related case studies |
 | `app/terms/page.tsx:29` | Placeholder: registered company name |
@@ -128,8 +127,8 @@ Everything here is visible on the site as a dashed `TODO` tag, or is a code comm
 | `components/about/TeamGrid.tsx:38` | Placeholder: role |
 | `components/about/TeamGrid.tsx:52` | Placeholder: fun fact |
 | `components/cms/MediaFrame.tsx:71` | Placeholder: {todo} |
-| `components/cms/ProjectCard.tsx:51` | Placeholder: client |
-| `components/cms/ProjectCard.tsx:66` | Placeholder: headline result, e.g. +X% conversions |
+| `components/cms/ProjectCard.tsx:62` | Placeholder: client |
+| `components/cms/ProjectCard.tsx:77` | Placeholder: headline result, e.g. +X% conversions |
 | `components/cms/RichText.tsx:44` | Placeholder: {p.slice(5).trim()} |
 | `components/cms/RichText.tsx:66` | Placeholder: {fallback} |
 | `components/layout/Footer.tsx:74` | Placeholder: email |
@@ -140,13 +139,12 @@ Everything here is visible on the site as a dashed `TODO` tag, or is a code comm
 | `components/layout/Footer.tsx:140` | Placeholder: registered company name |
 | `components/layout/Footer.tsx:142` | Placeholder: registration number |
 | `components/layout/MobileMenu.tsx:188` | Placeholder: contact email |
-| `components/scenes/BaseCamp.tsx:45` | Trust strip (brief §5): client logos or a countries line — TODO: real, permitted logos. |
-| `components/scenes/BaseCamp.tsx:47` | Placeholder: trust strip — client logos or &ldquo;Trusted by teams in N countries&rdquo; |
-| `components/scenes/BlueprintRoom.tsx:16` | TODO: confirm caption copy; durations must be the studio's real typical timings. |
-| `components/scenes/BlueprintRoom.tsx:102` | Placeholder: duration |
-| `components/scenes/Summit.tsx:57` | Placeholder: number |
-| `components/scenes/ThePath.tsx:14` | TODO: confirm — statement copy drafted from the brief's three prompts. |
-| `components/scenes/ThePath.tsx:130` | Placeholder: number |
+| `components/scenes/BaseCamp.tsx:135` | Trust strip (brief §5): client logos or a countries line — TODO: real, permitted logos. |
+| `components/scenes/BlueprintRoom.tsx:17` | TODO: confirm caption copy; durations must be the studio's real typical timings. |
+| `components/scenes/BlueprintRoom.tsx:103` | Placeholder: duration |
+| `components/scenes/Summit.tsx:58` | Placeholder: number |
+| `components/scenes/ThePath.tsx:15` | TODO: confirm — statement copy drafted from the brief's three prompts. |
+| `components/scenes/ThePath.tsx:132` | Placeholder: number |
 | `components/scenes/Voices.tsx:13` | const RATINGS = ["Clutch", "Google", "GoodFirms"]; // TODO: real ratings + profile links |
 | `components/scenes/Voices.tsx:56` | Placeholder: client quote (with permission) |
 | `components/scenes/Voices.tsx:67` | Placeholder: name |
@@ -185,15 +183,15 @@ Everything here is visible on the site as a dashed `TODO` tag, or is a code comm
 | `styles/tokens.css:22` | --pn-grey: #777775; /* line-work, from logo — TODO: confirm (brief example was #8A8A8A) |
 | `styles/tokens.css:24` | --pn-charcoal: #1e1e1e; /* ink — TODO: confirm (logo wordmark is #101216) |
 | `styles/tokens.css:29` | --pn-orange: #ff5b27; /* Pinnacle orange, from logo apex — TODO: confirm |
-| `.env.example:7` | --- Phase 4 (Contact Summit) — TODO: provide --- |
-| `.env.example:37` | --- Phase 5 (CMS + inner pages) — TODO: provide --- |
+| `.env.example:14` | --- Phase 4 (Contact Summit) — TODO: provide --- |
+| `.env.example:50` | --- Phase 5 (CMS + inner pages) — TODO: provide --- |
 
 ## Copy and values to confirm (26)
 
 | Where | What |
 | --- | --- |
 | `app/fonts.ts:7` | TODO: confirm — these are free (OFL) defaults chosen to match the brief: |
-| `app/layout.tsx:45` | themeColor: "#f6f1e7", // TODO: confirm (matches --pn-cream) |
+| `app/layout.tsx:49` | themeColor: "#f6f1e7", // TODO: confirm (matches --pn-cream) |
 | `app/privacy/page.tsx:124` | Placeholder: confirm transfer mechanisms |
 | `components/faq/FaqList.tsx:100` | Placeholder: confirm this answer |
 | `components/scenes/ServiceIcon.tsx:3` | 24px grid, 1.5px strokes, round caps. TODO: confirm — a designer may redraw these. |
@@ -219,10 +217,12 @@ Everything here is visible on the site as a dashed `TODO` tag, or is a code comm
 | `styles/tokens.css:26` | --pn-night: #181715; /* night-sky footer — TODO: confirm |
 | `styles/tokens.css:30` | --pn-peach: #ffd9c6; /* glow behind the Dot only — TODO: confirm |
 
-## Other (3)
+## Other (5)
 
 | Where | What |
 | --- | --- |
 | `app/work/[slug]/page.tsx:108` | Placeholder: live link |
 | `components/legal/LegalDoc.tsx:33` | Placeholder: date |
+| `components/scenes/BaseCamp.tsx:157` | <Todo> |
+| `lib/cms/index.ts:53` | (lib/demo.ts — never on the live site), otherwise the TODO placeholders. |
 | `content/seed/people.ts:27` | "TODO: what you’ll do, who you’ll work with, what success looks like in six months.", |

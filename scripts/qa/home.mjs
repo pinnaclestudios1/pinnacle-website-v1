@@ -81,9 +81,21 @@ async function desktop(browser) {
     timeout: 6000,
   });
   const preMs = Date.now() - t0;
-  check(run, "preloader ends within ~2.5s", preMs <= 3200, `${preMs}ms incl. navigation`);
+  // Measured from first paint, so a slow machine or a cold browser doesn't count
+  // against it; the total is reported alongside.
+  const afterPaint = await page.evaluate(() =>
+    Math.round(
+      performance.now() - (performance.getEntriesByName("first-paint")[0]?.startTime ?? 0),
+    ),
+  );
+  check(
+    run,
+    "preloader ends ~2.5s after first paint",
+    afterPaint <= 2800 && preMs <= 4500,
+    `${afterPaint}ms after first paint, ${preMs}ms incl. navigation`,
+  );
 
-  // Hero: the Dot waves, then lands beside "Let's climb".
+  // Hero: the Dot rises on the summit, waves, and settles on its peak.
   const landed = await page
     .waitForFunction(
       () => {
@@ -101,7 +113,7 @@ async function desktop(browser) {
     )
     .then(() => true)
     .catch(() => false);
-  check(run, "hero Dot hops off the logo and lands by 'Let's climb'", landed);
+  check(run, "hero Dot rises on the summit and settles there", landed);
   await shot(page, "desktop-1-base-camp");
 
   // Stage 2

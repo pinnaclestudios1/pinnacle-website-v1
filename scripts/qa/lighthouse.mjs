@@ -15,12 +15,14 @@ import path from "node:path";
 import * as chromeLauncher from "chrome-launcher";
 import lighthouse from "lighthouse";
 import desktopConfig from "lighthouse/core/config/desktop-config.js";
+import { detailRoutes } from "./routes.mjs";
 
 const BASE = process.env.BASE_URL ?? "http://localhost:3000";
+const DETAIL = await detailRoutes(BASE);
 const OUT = path.resolve("docs/qa/lighthouse");
 const CHROME = process.env.CHROME_PATH ?? "C:/Program Files/Google/Chrome/Application/chrome.exe";
 const KEY = ["/", "/work", "/contact"]; // the brief's launch-checklist pages
-const ROUTES = [...KEY, "/services/web-development", "/work/project-one", "/about", "/process"];
+const ROUTES = [...KEY, "/services/web-development", DETAIL.project, "/about", "/process"];
 /** Lighthouse varies run to run: the brief's pages on mobile use the median of 3. */
 const RUNS = Number(process.env.LH_RUNS ?? 3);
 const runsFor = (route, form) => (form === "mobile" && KEY.includes(route) ? RUNS : 1);

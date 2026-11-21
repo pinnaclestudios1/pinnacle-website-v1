@@ -9,8 +9,10 @@
 import { mkdir, writeFile } from "node:fs/promises";
 import path from "node:path";
 import puppeteer from "puppeteer-core";
+import { detailRoutes } from "./routes.mjs";
 
 const BASE = process.env.BASE_URL ?? "http://localhost:3000";
+const DETAIL = await detailRoutes(BASE);
 const OUT = path.resolve("docs/qa/pages");
 const CHROME =
   process.env.CHROME_PATH ??
@@ -18,7 +20,7 @@ const CHROME =
 
 const ROUTES = [
   "/work",
-  "/work/project-one",
+  DETAIL.project,
   "/services",
   "/services/web-development",
   "/services/mobile-apps",
@@ -26,7 +28,7 @@ const ROUTES = [
   "/process",
   "/about",
   "/careers",
-  "/careers/example-role",
+  DETAIL.job,
   "/faq",
   "/hello",
   "/contact",
@@ -143,7 +145,7 @@ try {
   );
 
   // Case study template.
-  await page.goto(`${BASE}/work/project-one`, { waitUntil: "networkidle0" });
+  await page.goto(`${BASE}${DETAIL.project}`, { waitUntil: "networkidle0" });
   const sections = await page.$$eval("h2", (hs) => hs.map((h) => h.textContent.trim()));
   const needed = [
     "At a glance",

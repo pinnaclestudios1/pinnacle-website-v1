@@ -15,7 +15,7 @@
     "run": "tab /",
     "name": "focus moves through the page without a trap",
     "pass": true,
-    "detail": "7 stops"
+    "detail": "4 stops"
   },
   {
     "run": "tab /",
@@ -51,7 +51,7 @@
     "run": "tab /work",
     "name": "focus moves through the page without a trap",
     "pass": true,
-    "detail": "38 stops"
+    "detail": "46 stops"
   },
   {
     "run": "tab /work",
@@ -72,37 +72,37 @@
     "detail": ""
   },
   {
-    "run": "tab /work/project-one",
+    "run": "tab /work/kestrel-analytics",
     "name": "first Tab lands on the skip link",
     "pass": true,
     "detail": "Skip to content"
   },
   {
-    "run": "tab /work/project-one",
+    "run": "tab /work/kestrel-analytics",
     "name": "skip link moves focus to the main content",
     "pass": true,
     "detail": ""
   },
   {
-    "run": "tab /work/project-one",
+    "run": "tab /work/kestrel-analytics",
     "name": "focus moves through the page without a trap",
     "pass": true,
     "detail": "30 stops"
   },
   {
-    "run": "tab /work/project-one",
+    "run": "tab /work/kestrel-analytics",
     "name": "every stop shows a focus ring",
     "pass": true,
     "detail": ""
   },
   {
-    "run": "tab /work/project-one",
+    "run": "tab /work/kestrel-analytics",
     "name": "focused elements scroll into view",
     "pass": true,
     "detail": ""
   },
   {
-    "run": "tab /work/project-one",
+    "run": "tab /work/kestrel-analytics",
     "name": "focus is never hidden under the sticky header",
     "pass": true,
     "detail": ""
@@ -159,7 +159,7 @@
     "run": "tab /services/web-development",
     "name": "focus moves through the page without a trap",
     "pass": true,
-    "detail": "30 stops"
+    "detail": "31 stops"
   },
   {
     "run": "tab /services/web-development",
@@ -231,7 +231,7 @@
     "run": "tab /about",
     "name": "focus moves through the page without a trap",
     "pass": true,
-    "detail": "31 stops"
+    "detail": "33 stops"
   },
   {
     "run": "tab /about",
@@ -252,37 +252,37 @@
     "detail": ""
   },
   {
-    "run": "tab /careers/example-role",
+    "run": "tab /careers/senior-product-designer",
     "name": "first Tab lands on the skip link",
     "pass": true,
     "detail": "Skip to content"
   },
   {
-    "run": "tab /careers/example-role",
+    "run": "tab /careers/senior-product-designer",
     "name": "skip link moves focus to the main content",
     "pass": true,
     "detail": ""
   },
   {
-    "run": "tab /careers/example-role",
+    "run": "tab /careers/senior-product-designer",
     "name": "focus moves through the page without a trap",
     "pass": true,
     "detail": "33 stops"
   },
   {
-    "run": "tab /careers/example-role",
+    "run": "tab /careers/senior-product-designer",
     "name": "every stop shows a focus ring",
     "pass": true,
     "detail": ""
   },
   {
-    "run": "tab /careers/example-role",
+    "run": "tab /careers/senior-product-designer",
     "name": "focused elements scroll into view",
     "pass": true,
     "detail": ""
   },
   {
-    "run": "tab /careers/example-role",
+    "run": "tab /careers/senior-product-designer",
     "name": "focus is never hidden under the sticky header",
     "pass": true,
     "detail": ""
@@ -375,7 +375,7 @@
     "run": "tab /cookies",
     "name": "focus moves through the page without a trap",
     "pass": true,
-    "detail": "30 stops"
+    "detail": "31 stops"
   },
   {
     "run": "tab /cookies",

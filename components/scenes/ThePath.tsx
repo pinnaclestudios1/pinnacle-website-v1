@@ -3,6 +3,7 @@ import { Reveal } from "@/components/motion/Reveal";
 import { Container } from "@/components/ui/Container";
 import { Todo } from "@/components/ui/Todo";
 import { cn } from "@/lib/cn";
+import { demo } from "@/lib/demo";
 import { SceneMotion } from "./SceneMotion";
 
 /**
@@ -126,9 +127,11 @@ export function ThePath() {
             <div key={label}>
               <dt className="label text-ink-soft">{label}</dt>
               <dd className="mt-3 font-display text-h2">
-                <span className="align-middle text-base">
-                  <Todo>number</Todo>
-                </span>
+                {demo?.numbers[label] ?? (
+                  <span className="align-middle text-base">
+                    <Todo>number</Todo>
+                  </span>
+                )}
               </dd>
             </div>
           ))}

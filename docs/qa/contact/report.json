@@ -63,13 +63,13 @@
     "run": "brief",
     "name": "high-value lead flagged in Slack (call within 2 hours)",
     "pass": true,
-    "detail": "🔥 High-value lead — call within 2 hours: Test Climber (PB-261118-8ERH)"
+    "detail": "🔥 High-value lead — call within 2 hours: Test Climber (PB-261121-9PU3)"
   },
   {
     "run": "brief",
     "name": "lands on the thank-you page with a reference",
     "pass": true,
-    "detail": "http://localhost:3100/contact/thank-you?ref=PB-261118-8ERH"
+    "detail": "http://localhost:3100/contact/thank-you?ref=PB-261121-9PU3"
   },
   {
     "run": "brief",
@@ -87,7 +87,7 @@
     "run": "brief-scoring",
     "name": "small-budget lead is not flagged high-value",
     "pass": true,
-    "detail": "New lead: Test Climber (PB-261118-2G8N)"
+    "detail": "New lead: Test Climber (PB-261121-CRI3)"
   },
   {
     "run": "draft",

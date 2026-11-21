@@ -6,6 +6,7 @@ import { Logo } from "@/components/brand/Logo";
 import { TransitionLink } from "@/components/motion/PageTransition";
 import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/cn";
+import { onScroll, scrollY } from "@/lib/motion/scroll";
 import { ctaHref, primaryNav } from "@/lib/site";
 import { MobileMenu } from "./MobileMenu";
 
@@ -21,20 +22,14 @@ export function Header() {
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
 
+  // The shared scroll signal hands over the position (no DOM read); React skips the
+  // re-render when the boolean doesn't change.
   useEffect(() => {
-    let frame = 0;
-    const update = () => {
-      frame = 0;
-      setScrolled(window.scrollY > 8);
-    };
-    const onScroll = () => {
-      if (!frame) frame = requestAnimationFrame(update);
-    };
-    update();
-    window.addEventListener("scroll", onScroll, { passive: true });
+    const first = requestAnimationFrame(() => setScrolled(scrollY() > 8));
+    const off = onScroll((y) => setScrolled(y > 8));
     return () => {
-      window.removeEventListener("scroll", onScroll);
-      cancelAnimationFrame(frame);
+      cancelAnimationFrame(first);
+      off();
     };
   }, []);
 

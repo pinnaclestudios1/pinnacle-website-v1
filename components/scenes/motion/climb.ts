@@ -47,15 +47,29 @@ function horizontal(
     active = index;
   };
 
+  // Geometry is measured once per refresh (resize, pins, fonts), then the node under the
+  // Dot is found from the track's current x alone — no layout reads while scrolling.
+  let dotX = 0; // the Dot's centre on screen (it stays put; the track moves under it)
+  let trackLeft0 = 0; // the track's left edge on screen when x = 0
+  let centres: number[] = []; // node circle centres, relative to the track's left edge
+  const measure = () => {
+    const shift = Number(gsap.getProperty(track, "x")) || 0;
+    const t = track.getBoundingClientRect();
+    const d = dotSpot.getBoundingClientRect();
+    dotX = d.left + d.width / 2;
+    trackLeft0 = t.left - shift;
+    centres = nodes.map((n) => {
+      const c = circleOf(n)?.getBoundingClientRect();
+      return c ? c.left + c.width / 2 - t.left : Infinity;
+    });
+  };
   const nearestToDot = () => {
-    const r = dotSpot.getBoundingClientRect();
-    const x = r.left + r.width / 2;
+    // GSAP caches x, so this reads no layout.
+    const trackLeft = trackLeft0 + (Number(gsap.getProperty(track, "x")) || 0);
     let best = 0;
     let bestDist = Infinity;
-    nodes.forEach((n, i) => {
-      const c = circleOf(n)?.getBoundingClientRect();
-      if (!c) return;
-      const d = Math.abs(c.left + c.width / 2 - x);
+    centres.forEach((cx, i) => {
+      const d = Math.abs(trackLeft + cx - dotX);
       if (d < bestDist) {
         bestDist = d;
         best = i;
@@ -81,8 +95,13 @@ function horizontal(
         pin: true,
         scrub: 0.6,
         invalidateOnRefresh: true,
+        onRefresh: () => {
+          measure();
+          setActive(nearestToDot());
+        },
       },
     });
+    measure();
     setActive(nearestToDot());
     refreshScrollTriggers();
   });
@@ -119,7 +138,6 @@ function vertical(
   const container = dotSpot.parentElement;
   if (!container) return () => {};
   let active = -1;
-  let frame = 0;
 
   /** Where the Dot sits on node i: centred on top of its circle. */
   const spotFor = (i: number) => {
@@ -157,19 +175,9 @@ function vertical(
     }
   };
 
-  const update = () => {
-    frame = 0;
-    const mid = window.innerHeight / 2;
-    let best = 0;
-    let bestDist = Infinity;
-    nodes.forEach((n, i) => {
-      const r = n.getBoundingClientRect();
-      const d = Math.abs(r.top + r.height / 2 - mid);
-      if (d < bestDist) {
-        bestDist = d;
-        best = i;
-      }
-    });
+  // The node crossing the middle of the screen becomes active. An IntersectionObserver
+  // on a thin band at mid-screen replaces measuring every node on every scroll frame.
+  const activate = (best: number) => {
     if (best === active) return;
     const first = active < 0;
     if (active >= 0) nodes[active]?.removeAttribute("data-active");
@@ -177,21 +185,36 @@ function vertical(
     active = best;
     moveTo(best, first);
   };
+  const band = new IntersectionObserver(
+    (entries) => {
+      const hit = entries.filter((e) => e.isIntersecting).pop();
+      if (hit) activate(nodes.indexOf(hit.target as HTMLElement));
+    },
+    { rootMargin: "-45% 0px -45% 0px" },
+  );
+  // Start with the node nearest the middle (one measurement, at init).
+  const mid = window.innerHeight / 2;
+  let nearest = 0;
+  let nearestDist = Infinity;
+  nodes.forEach((n, i) => {
+    const r = n.getBoundingClientRect();
+    const d = Math.abs(r.top + r.height / 2 - mid);
+    if (d < nearestDist) {
+      nearestDist = d;
+      nearest = i;
+    }
+  });
 
-  const onScroll = () => {
-    if (!frame) frame = requestAnimationFrame(update);
-  };
   const onResize = () => {
     if (active >= 0) moveTo(active, true);
   };
 
-  update();
-  window.addEventListener("scroll", onScroll, { passive: true });
+  activate(nearest);
+  nodes.forEach((n) => band.observe(n));
   window.addEventListener("resize", onResize);
 
   return () => {
-    cancelAnimationFrame(frame);
-    window.removeEventListener("scroll", onScroll);
+    band.disconnect();
     window.removeEventListener("resize", onResize);
     gsap.killTweensOf(dotSpot);
     gsap.set(dotSpot, { clearProps: "x,y,opacity" });

@@ -7,6 +7,7 @@ import { Container } from "@/components/ui/Container";
 import { DraftNotice } from "@/components/ui/DraftNotice";
 import { Todo } from "@/components/ui/Todo";
 import { collaborationTools, communicationPromise, processPhases } from "@/content/studio";
+import { demo } from "@/lib/demo";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
@@ -43,7 +44,7 @@ export default function ProcessPage() {
                   <Item label="What happens">{p.what}</Item>
                   <Item label="What you get">{p.get}</Item>
                   <Item label="How long">
-                    <Todo>typical duration</Todo>
+                    {demo?.processDurations[p.name] ?? <Todo>typical duration</Todo>}
                   </Item>
                   <Item label="How you’re involved">{p.you}</Item>
                 </dl>

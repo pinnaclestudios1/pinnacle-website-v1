@@ -35,7 +35,13 @@ export function Preloader() {
   useEffect(() => {
     if (!introRunning()) return;
     const html = document.documentElement;
-    const done = window.setTimeout(finishIntro, DURATION_MS);
+    // The CSS animation started at first render, not at hydration: end with it.
+    const started = document
+      .querySelector(".preloader")
+      ?.getAnimations?.({ subtree: true })
+      .reduce((t, a) => Math.min(t, Number(a.startTime ?? Infinity)), Infinity);
+    const elapsed = Number.isFinite(started) ? performance.now() - started! : 0;
+    const done = window.setTimeout(finishIntro, Math.max(0, DURATION_MS - elapsed));
     let skipTimer = 0;
     const skip = () => {
       html.classList.add("preload-skip");

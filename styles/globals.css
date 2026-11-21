@@ -152,8 +152,10 @@
   }
 
   @media (prefers-reduced-motion: no-preference) {
+    /* Content rises into place with a slight backward lean (a touch of depth). */
     .js [data-reveal]:not([data-revealed]) {
-      transform: translate3d(0, 1.5rem, 0);
+      transform: perspective(1100px) translate3d(0, 1.5rem, 0) rotateX(7deg);
+      transform-origin: 50% 100%;
     }
   }
 
@@ -492,5 +494,164 @@ html.has-custom-cursor
 @media (prefers-reduced-motion: no-preference) {
   .star-twinkle {
     animation: pn-twinkle var(--star-d, 6s) ease-in-out var(--star-delay, 0s) infinite;
+  }
+}
+
+/* ---------- 3D layer: depth without WebGL (transform + opacity only) ----------
+   - [data-depth]: windows settle from tilted-back to face-on as they scroll in.
+   - [data-sky-layer]: night-sky stars on three depths drift at different rates.
+   Both are CSS scroll-driven animations: they run on the compositor (no JavaScript,
+   no main-thread work), follow Lenis's real scroll position, and simply don't run in
+   browsers without support. Pointer tilt for [data-tilt] is components/extras/tilt.ts.
+   Everything here is off under reduced motion. */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    [data-depth] {
+      transform-origin: 50% 100%;
+      animation: pn-depth linear both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 35%;
+    }
+    [data-sky-layer] {
+      animation: pn-sky-drift linear both;
+      animation-timeline: view();
+      animation-range: cover 0% cover 100%;
+    }
+    [data-sky-layer="far"] {
+      --sky-drift: 18px;
+    }
+    [data-sky-layer="mid"] {
+      --sky-drift: 42px;
+    }
+    [data-sky-layer="near"] {
+      --sky-drift: 80px;
+    }
+  }
+}
+
+@keyframes pn-depth {
+  from {
+    transform: perspective(1200px) translate3d(0, 2.5rem, -60px) rotateX(16deg);
+    opacity: 0.4;
+  }
+  to {
+    transform: none;
+    opacity: 1;
+  }
+}
+
+@keyframes pn-sky-drift {
+  from {
+    transform: translate3d(0, var(--sky-drift), 0);
+  }
+  to {
+    transform: translate3d(0, calc(var(--sky-drift) * -0.5), 0);
+  }
+}
+
+/* Light sheen on tilting windows: a soft highlight that follows the pointer.
+   Positioned by tilt.ts with transforms; invisible until the pointer is over the card. */
+.tilt-glare {
+  pointer-events: none;
+  position: absolute;
+  inset: -50%;
+  opacity: 0;
+  background: radial-gradient(circle at center, rgb(255 255 255 / 0.3), transparent 42%);
+}
+/* Layer hints only where tilt.ts actually runs (desktop, fine pointer, motion allowed). */
+.has-tilt [data-tilt],
+.has-tilt .tilt-glare {
+  will-change: transform;
+}
+
+/* ---------- Hero (Base Camp) ---------- */
+/* "Let's climb" cue: a short line with a segment travelling down it. */
+.scroll-cue {
+  position: relative;
+  display: block;
+  width: 1px;
+  height: 1.75rem;
+  overflow: hidden;
+  background: rgb(119 119 117 / 0.35);
+}
+.scroll-cue::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--pn-ink);
+  transform: translate3d(0, -100%, 0);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .scroll-cue::after {
+    animation: pn-cue 2.4s var(--pn-ease-out) infinite;
+  }
+
+  /* Staggered arrival around the (always visible) headline. Paused while the
+     first-visit intro plays, so it starts the moment the intro lifts. */
+  .js [data-hero-in] {
+    animation: pn-hero-in 0.9s var(--pn-ease-out) both;
+    animation-delay: calc(var(--i, 0) * 90ms + 80ms);
+  }
+  /* Dawn: the ranges rise one after another, like a sunrise. */
+  .js [data-dawn-rise] {
+    animation: pn-dawn-rise 1.4s var(--pn-ease-out) both;
+    animation-delay: calc(var(--i, 0) * 120ms + 60ms);
+  }
+  html.preload [data-hero-in],
+  html.preload [data-dawn-rise] {
+    animation-play-state: paused;
+  }
+
+  /* As the hero scrolls away the far ranges sink more than the near ones (parallax).
+     Scroll-driven: runs on the compositor; skipped where unsupported. */
+  @supports (animation-timeline: view()) {
+    [data-dawn-depth] {
+      animation: pn-dawn-sink linear both;
+      animation-timeline: view();
+      animation-range: cover 45% cover 100%;
+    }
+    [data-dawn-depth="0"] {
+      --sink: 30%;
+    }
+    [data-dawn-depth="1"] {
+      --sink: 20%;
+    }
+    [data-dawn-depth="2"] {
+      --sink: 10%;
+    }
+    [data-dawn-depth="3"] {
+      --sink: 0%;
+    }
+  }
+}
+
+@keyframes pn-dawn-rise {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 16%, 0);
+  }
+}
+
+@keyframes pn-dawn-sink {
+  to {
+    transform: translate3d(0, var(--sink, 0%), 0);
+  }
+}
+
+@keyframes pn-hero-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 1.1rem, 0);
+  }
+}
+
+@keyframes pn-cue {
+  0% {
+    transform: translate3d(0, -100%, 0);
+  }
+  55%,
+  100% {
+    transform: translate3d(0, 100%, 0);
   }
 }

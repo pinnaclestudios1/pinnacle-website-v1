@@ -1,3 +1,4 @@
+import { onFrame } from "@/lib/motion/scroll";
 import type { DotActor } from "./types";
 
 /**
@@ -34,7 +35,8 @@ export class DotFlight {
   private t0 = 0;
   private dur = 600;
   private arc = 0;
-  private frame = 0;
+  /** Unsubscribes the per-frame step (runs right after Lenis, before GSAP renders). */
+  private stop: (() => void) | null = null;
   private land: (() => void) | null = null;
 
   get active() {
@@ -80,14 +82,14 @@ export class DotFlight {
     this.dur = Math.min(900, Math.max(420, 360 + dist * 0.45));
     this.arc = Math.min(140, dist * 0.28);
     this.t0 = performance.now();
-    if (!this.frame) this.frame = requestAnimationFrame(this.tick);
+    if (!this.stop) this.stop = onFrame(this.tick);
     return true;
   }
 
   /** Stop without landing (e.g. the menu or the page curtain takes over). */
   cancel() {
-    cancelAnimationFrame(this.frame);
-    this.frame = 0;
+    this.stop?.();
+    this.stop = null;
     this.target = null;
     this.land = null;
     this.el?.remove();
@@ -134,10 +136,14 @@ export class DotFlight {
       `rotate(${tilt}deg) scale(${s * (1 - stretch * 0.6)}, ${s * (1 + stretch)})`;
   }
 
-  private tick = (now: number) => {
-    this.frame = 0;
+  private tick = () => {
+    const now = performance.now();
     const target = this.target;
-    if (!target) return;
+    if (!target) {
+      this.stop?.();
+      this.stop = null;
+      return;
+    }
     const live = target.getBounds();
     if (live) this.last = toBox(live);
     const { from, last: end } = this;
@@ -157,10 +163,9 @@ export class DotFlight {
     // Lean into the direction of travel and stretch a touch at the top of the hop.
     this.paint(b, (dx / dist) * 14 * lift, 0.07 * lift);
 
-    if (t < 1) {
-      this.frame = requestAnimationFrame(this.tick);
-      return;
-    }
+    if (t < 1) return;
+    this.stop?.();
+    this.stop = null;
     const land = this.land;
     this.target = null;
     this.land = null;

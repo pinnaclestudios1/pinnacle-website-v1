@@ -23,7 +23,9 @@
     "qa:keyboard": "node scripts/qa/keyboard.mjs",
     "qa:browsers": "node scripts/qa/browsers.mjs",
     "qa:todos": "node scripts/qa/todos.mjs",
+    "qa:smooth": "node scripts/qa/smooth.mjs",
     "brand:mascot": "node scripts/brand/mascot.mjs",
+    "demo:media": "node scripts/demo/media.mjs",
     "cms:seed": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/cms/export-seed.mts"
   },
   "dependencies": {

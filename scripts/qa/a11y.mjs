@@ -12,25 +12,27 @@ import { readFile, mkdir, writeFile } from "node:fs/promises";
 import { createRequire } from "node:module";
 import path from "node:path";
 import puppeteer from "puppeteer-core";
+import { detailRoutes } from "./routes.mjs";
 
 const require = createRequire(import.meta.url);
 const AXE = await readFile(require.resolve("axe-core/axe.min.js"), "utf8");
 
 const BASE = process.env.BASE_URL ?? "http://localhost:3000";
+const DETAIL = await detailRoutes(BASE);
 const OUT = path.resolve("docs/qa/a11y");
 const CHROME = process.env.CHROME_PATH ?? "C:/Program Files/Google/Chrome/Application/chrome.exe";
 
 const ROUTES = [
   "/",
   "/work",
-  "/work/project-one",
+  DETAIL.project,
   "/services",
   "/services/web-development",
   "/services/ecommerce",
   "/process",
   "/about",
   "/careers",
-  "/careers/example-role",
+  DETAIL.job,
   "/faq",
   "/hello",
   "/contact",

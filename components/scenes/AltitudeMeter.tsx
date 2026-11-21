@@ -1,13 +1,14 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { onScroll, scrollY } from "@/lib/motion/scroll";
 import { site } from "@/lib/site";
 
 /**
  * Altitude meter (brief §5): counts 0m at Base Camp → 8,848m at The Summit as you scroll.
  * Desktop home only, in the right-hand gutter so it never covers content.
  * One tick per stage. Decorative for screen readers (the stage headings carry the story).
- * Updates are rAF-throttled text + one transform; it fades out over the night-sky footer.
+ * Updates (text + one transform) ride the shared scroll signal; it fades out over the footer.
  */
 export function AltitudeMeter() {
   const root = useRef<HTMLDivElement>(null);
@@ -25,7 +26,6 @@ export function AltitudeMeter() {
     const TRACK = 176; // px, matches h-44
     let summitY = 1;
     let stageYs: number[] = [];
-    let frame = 0;
     let last = -1;
 
     const measure = () => {
@@ -41,21 +41,17 @@ export function AltitudeMeter() {
       Array.from(tk.children).forEach((t, i) => {
         (t as HTMLElement).style.transform = `translateY(${-(stageYs[i] ?? 0) * TRACK}px)`;
       });
-      update();
+      update(scrollY());
     };
 
-    const update = () => {
-      frame = 0;
-      const p = Math.min(1, Math.max(0, window.scrollY / summitY));
+    // Runs from the shared scroll signal: position handed over, no DOM reads.
+    const update = (y: number) => {
+      const p = Math.min(1, Math.max(0, y / summitY));
       const metres = Math.round(p * site.summitAltitude);
       if (metres === last) return;
       last = metres;
       mk.style.transform = `translateY(${-p * TRACK}px)`;
       out.textContent = metres.toLocaleString("en-US");
-    };
-
-    const onScroll = () => {
-      if (!frame) frame = requestAnimationFrame(update);
     };
 
     // Layout changes (pinned scenes add spacing, fonts load) → re-measure.
@@ -69,13 +65,12 @@ export function AltitudeMeter() {
     });
     if (footer) io.observe(footer);
 
-    window.addEventListener("scroll", onScroll, { passive: true });
+    const offScroll = onScroll(update);
     measure();
     return () => {
-      cancelAnimationFrame(frame);
       ro.disconnect();
       io.disconnect();
-      window.removeEventListener("scroll", onScroll);
+      offScroll();
     };
   }, []);
 

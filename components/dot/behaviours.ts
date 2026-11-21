@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { onScroll as onPageScroll, scrollY } from "@/lib/motion/scroll";
 import { dot } from "./controller";
 import type { Point } from "./types";
 
@@ -58,16 +59,16 @@ export function useDotBehaviours() {
     };
 
     /* ---------- scroll: guide / roll back / dizzy ---------- */
-    let lastY = window.scrollY;
+    let lastY = scrollY();
     let lastT = performance.now();
     let lastReact = 0;
     let lastDizzy = 0;
-    const onScroll = () => {
+    const onScroll = (y: number) => {
       activity();
       const now = performance.now();
       const dt = now - lastT;
-      const dy = window.scrollY - lastY;
-      lastY = window.scrollY;
+      const dy = y - lastY;
+      lastY = y;
       lastT = now;
       // A long gap means a new gesture (or a programmatic jump) — just re-baseline.
       if (dt > 120 || !dot.autoBehaviours || !dot.scrollReactions) return;
@@ -128,7 +129,7 @@ export function useDotBehaviours() {
     window.addEventListener("pointerdown", activity, opts);
     window.addEventListener("wheel", activity, opts);
     window.addEventListener("touchstart", activity, opts);
-    window.addEventListener("scroll", onScroll, opts);
+    const offScroll = onPageScroll(onScroll);
     document.addEventListener("pointerover", onPointerOver, opts);
     document.addEventListener("focusin", onFocusIn);
     window.addEventListener("keydown", onKeyDown);
@@ -141,7 +142,7 @@ export function useDotBehaviours() {
       window.removeEventListener("pointerdown", activity);
       window.removeEventListener("wheel", activity);
       window.removeEventListener("touchstart", activity);
-      window.removeEventListener("scroll", onScroll);
+      offScroll();
       document.removeEventListener("pointerover", onPointerOver);
       document.removeEventListener("focusin", onFocusIn);
       window.removeEventListener("keydown", onKeyDown);

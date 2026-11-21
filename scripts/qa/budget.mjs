@@ -8,13 +8,15 @@
  *   npm run qa:budget               # in another
  */
 import { gzipSync } from "node:zlib";
+import { detailRoutes } from "./routes.mjs";
 
 const BASE = process.env.BASE_URL ?? "http://localhost:3000";
+const DETAIL = await detailRoutes(BASE);
 const LIMIT = Number(process.env.BUDGET_KB ?? 200);
 const ROUTES = [
   "/",
   "/work",
-  "/work/project-one",
+  DETAIL.project,
   "/services/web-development",
   "/about",
   "/faq",

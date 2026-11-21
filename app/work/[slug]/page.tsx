@@ -9,7 +9,7 @@ import { Reveal } from "@/components/motion/Reveal";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { Todo } from "@/components/ui/Todo";
-import { getProject, getProjects } from "@/lib/cms";
+import { getProject, getProjects, platformLabel } from "@/lib/cms";
 import type { Project } from "@/lib/cms/types";
 import { pageMetadata } from "@/lib/seo";
 import { services } from "@/lib/site";
@@ -137,7 +137,7 @@ export default async function CaseStudyPage({ params }: Props) {
                 {project.glance.teamSize ?? <Todo>team size</Todo>}
               </GlanceRow>
               <GlanceRow label="Platform">
-                {project.platforms.join(", ") || <Todo>platform</Todo>}
+                {project.platforms.map(platformLabel).join(", ") || <Todo>platform</Todo>}
               </GlanceRow>
               <GlanceRow label="Tech">
                 {project.glance.techStack.join(", ") || <Todo>tech stack</Todo>}

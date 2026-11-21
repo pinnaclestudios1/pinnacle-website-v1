@@ -2,6 +2,7 @@ import { DotActorView } from "@/components/dot/DotActorView";
 import { TransitionLink } from "@/components/motion/PageTransition";
 import { Container } from "@/components/ui/Container";
 import { Todo } from "@/components/ui/Todo";
+import { demo } from "@/lib/demo";
 import { SceneMotion } from "./SceneMotion";
 
 /**
@@ -99,7 +100,7 @@ export function BlueprintRoom() {
                   </p>
                   <p className="mt-1.5 text-[0.9375rem]">{p.line}</p>
                   <p className="mt-1 text-xs text-ink-soft">
-                    Typical: <Todo>duration</Todo>
+                    Typical: {demo?.blueprintDurations[p.name] ?? <Todo>duration</Todo>}
                   </p>
                 </li>
               ))}

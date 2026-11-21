@@ -14,6 +14,7 @@ import { createServer } from "node:http";
 import { mkdir, writeFile } from "node:fs/promises";
 import path from "node:path";
 import puppeteer from "puppeteer-core";
+import { detailRoutes } from "./routes.mjs";
 
 const OUT = path.resolve("docs/qa/contact");
 const MOCK_PORT = 4010;
@@ -511,7 +512,7 @@ try {
     const run = "careers";
     reset();
     const { page, ctx, errors } = await newPage();
-    await page.goto(`${BASE}/careers/example-role`, { waitUntil: "networkidle0" });
+    await page.goto(`${BASE}${(await detailRoutes(BASE)).job}`, { waitUntil: "networkidle0" });
     await sleep(3200);
     const f = "form:has(input[name=portfolio])";
     await page.type(`${f} input[name=name]`, "Ada Applicant");

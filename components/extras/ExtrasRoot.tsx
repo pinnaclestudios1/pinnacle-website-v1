@@ -8,7 +8,8 @@ import { ConsentRoot } from "./ConsentRoot";
 
 /**
  * Optional extras that must not cost the initial bundle (brief §11):
- * - Custom cursor: desktop + fine pointer + motion allowed; code loads when the page is idle.
+ * - Custom cursor and 3D pointer tilt: desktop + fine pointer + motion allowed; their code
+ *   loads when the page is idle.
  * - Sound: off by default; the synth engine loads the first time it's switched on.
  * - Cookie consent + analytics (ConsentRoot).
  * The sound toggle is always visible (brief §4 "Always visible").
@@ -26,16 +27,20 @@ export function ExtrasRoot() {
   const desktopPointer = useMediaQuery("(min-width: 1024px) and (pointer: fine)");
   const [sound, setSound] = useState(false);
 
-  // Cursor
+  // Cursor + 3D tilt
   useEffect(() => {
     if (reduced || !desktopPointer) return;
     let stop: (() => void) | undefined;
     let cancelled = false;
     idle(() => {
-      void import("./cursor").then((m) => {
+      void Promise.all([import("./cursor"), import("./tilt")]).then(([cursor, tilt]) => {
         if (cancelled) return;
-        m.start();
-        stop = m.stop;
+        cursor.start();
+        tilt.start();
+        stop = () => {
+          cursor.stop();
+          tilt.stop();
+        };
       });
     });
     return () => {

@@ -20,6 +20,7 @@ export function Summit() {
       <section
         id="summit"
         data-stage="7"
+        data-tilt-area=""
         aria-labelledby="summit-title"
         className="py-[var(--pn-section)]"
       >
@@ -80,6 +81,7 @@ export function Summit() {
               props={["flag"]}
               gaze={{ x: 2, y: -4 }}
               interactive
+              tilt
               className="relative"
             />
           </div>

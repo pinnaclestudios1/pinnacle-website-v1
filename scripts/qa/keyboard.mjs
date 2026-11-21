@@ -14,19 +14,21 @@
 import { mkdir, writeFile } from "node:fs/promises";
 import path from "node:path";
 import puppeteer from "puppeteer-core";
+import { detailRoutes } from "./routes.mjs";
 
 const BASE = process.env.BASE_URL ?? "http://localhost:3000";
+const DETAIL = await detailRoutes(BASE);
 const OUT = path.resolve("docs/qa/keyboard");
 const CHROME = process.env.CHROME_PATH ?? "C:/Program Files/Google/Chrome/Application/chrome.exe";
 const ROUTES = [
   "/",
   "/work",
-  "/work/project-one",
+  DETAIL.project,
   "/services",
   "/services/web-development",
   "/process",
   "/about",
-  "/careers/example-role",
+  DETAIL.job,
   "/faq",
   "/contact",
   "/cookies",

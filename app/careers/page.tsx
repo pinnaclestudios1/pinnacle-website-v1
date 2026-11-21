@@ -8,6 +8,7 @@ import { DraftNotice } from "@/components/ui/DraftNotice";
 import { Todo } from "@/components/ui/Todo";
 import { careers } from "@/content/studio";
 import { getJobs } from "@/lib/cms";
+import { demo } from "@/lib/demo";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
@@ -106,7 +107,7 @@ export default async function CareersPage() {
             Benefits
           </h2>
           <ul className="mt-6 space-y-3">
-            {careers.benefits.map((b, i) => (
+            {(demo?.benefits ?? careers.benefits).map((b, i) => (
               <li key={i} className="flex gap-3">
                 <span aria-hidden className="mt-2.5 size-1.5 shrink-0 rounded-full bg-ink" />
                 {b.startsWith("TODO:") ? <Todo>{b.slice(5).trim()}</Todo> : b}

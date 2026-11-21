@@ -3,7 +3,7 @@ import { PageIntro } from "@/components/layout/PageIntro";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { WorkGrid, WorkIndex, type FilterGroup } from "@/components/work/WorkIndex";
-import { getProjects } from "@/lib/cms";
+import { getProjects, platformLabel } from "@/lib/cms";
 import { pageMetadata } from "@/lib/seo";
 import { services } from "@/lib/site";
 
@@ -12,13 +12,6 @@ export const metadata = pageMetadata({
   description: "Peaks conquered — selected websites, apps and brands by Pinnacle Studios.",
   path: "/work",
 });
-
-const PLATFORM_LABELS: Record<string, string> = {
-  web: "Web",
-  ios: "iOS",
-  android: "Android",
-  desktop: "Desktop",
-};
 
 export default async function WorkPage() {
   const projects = await getProjects();
@@ -45,7 +38,7 @@ export default async function WorkPage() {
       label: "Platform",
       options: used(projects.flatMap((p) => p.platforms)).map((v) => ({
         value: v,
-        label: PLATFORM_LABELS[v] ?? v,
+        label: platformLabel(v),
       })),
     },
   ].filter((g) => g.options.length > 0);
